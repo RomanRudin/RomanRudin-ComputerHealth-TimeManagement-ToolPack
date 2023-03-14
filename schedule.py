@@ -1,4 +1,4 @@
 from PyQt5.QtWidgets import QWidget
 
-class Window(QWidget):
+class Schedule(QWidget):
     pass
