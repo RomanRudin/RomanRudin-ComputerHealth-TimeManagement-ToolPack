@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy
-from health import Health
-from schedule import Schedule
-from time_managment import Management
-
+from apps.health import Health
+from apps.schedule import Schedule
+from apps.time_managment import Management
+from apps.module import *
 
 class Window(QWidget):
     def __init__(self):
