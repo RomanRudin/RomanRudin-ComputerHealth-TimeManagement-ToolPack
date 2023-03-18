@@ -18,7 +18,7 @@ class Log():
         if not path.exists(self.path):
             makedirs(self.dir)
         with open(self.path, 'w', encoding='utf-8') as file:
-            self.logs = dict(sorted(self.logs.items(), key=lambda item: item[1][1]))
+            self.logs = dict(sorted(self.logs.items(), key=lambda item: item[1][1], reverse=True))
             text = ''
             for process, data in self.logs.items():
                 print(process, data)

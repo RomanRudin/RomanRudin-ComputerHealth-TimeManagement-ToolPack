@@ -1,0 +1,7 @@
+Game = True
+Entartainment = False
+Code = True
+Learning = False
+Browser = False
+Social Network = False
+Tools = True
