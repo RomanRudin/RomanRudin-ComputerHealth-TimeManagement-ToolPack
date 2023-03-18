@@ -1,10 +1,12 @@
 from turtle import color
-from PyQt5.QtWidgets import QWidget, QListWidget, QLabel, QListView, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QWidget, QListWidget, QVBoxLayout, QHBoxLayout, QSizePolicy
+from matplotlib import colors
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasAgg
-from appData.constants.constants import bar1_colors, bar2_colors
+from appData.constants.constants import BAR1_COLORS, BAR2_COLORS
 from random import randint
 from main import log
+from appData.settings.settings_parser import BARS
 
 class Helper(QWidget):
     pass
@@ -12,14 +14,19 @@ class Helper(QWidget):
 class Management(QWidget):
     def __init__(self):
         main_layout = QVBoxLayout()
+        changes_layout = QVBoxLayout()
+        main_statistic_layout = QHBoxLayout()
 
         #plotting: plot for gaming, coding and learning
         self.statistic_in_spheres = plt.figure()
         self.statistic_in_spheres_canvas = FigureCanvasAgg(self.statistic_in_spheres)
+        main_statistic_layout.addWidget(self.statistic_in_spheres_canvas, stretch=3)
         #plotting: plot for top 10 programms you waqsted time on
-        random_bar_colors = bar2_colors.copy()
+        random_bar_colors = BAR2_COLORS.copy()
         self.statistic_of_programms = plt.figure()
         self.statistic_of_programms_canvas = FigureCanvasAgg(self.statistic_of_programms)
+
+        #choosing random colors for bars
         self.color_data = {
             'Game': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
             'Entartainment': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
@@ -30,13 +37,16 @@ class Management(QWidget):
             'Tools': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
         }
 
+        self.changes_list = []
+        for bar in BARS:
+            changes = QListWidget()
+            changes.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+
+
+
     def refresh(self):
         self.plot()
-
-
-    def parse(self):
-        pass
-
 
 
     def plot(self):
@@ -46,28 +56,17 @@ class Management(QWidget):
         ax1 = self.statistic_in_spheres.add_subplot(111)
         ax2 = self.statistic_of_programms.add_subplot(111)
 
-        '''
-        Depending on the setting user will be able to choose, what stitistic they wanna see in programm. So, I'll need suitable version of the next coded
-        for future versions. 
 
-        time_container = {
-            'Game': 0,
-            'Entartainment': 0,
-            'Code': 0,
-            'Learning': 0,
-            'Browser': 0,
-            'Social Network': 0,
-            'Tools': 0,
-        }
+        time_in_sphere = {bar: sum(data[1] for data in log.logs.values() if data[0] == bar) for bar in BARS}
 
-        '''
+        ax1.barh(time_in_sphere.keys(), time_in_sphere.values(), align='center', alpha=0.4, colors=BAR1_COLORS)
+        ax1.plot(time_in_sphere.values(), time_in_sphere.keys(), marker='D', linestyle='none', alpha=0.8, color='green')
+        #TODO make a plot-marker for changeable markers. Firstly I'll need to make a function, that will count those markers
+        ax1.plot(time_in_sphere.values(), time_in_sphere.keys(), marker='D', linestyle='none', alpha=0.8, color='red')
 
-        ax1.barh()
-        ax1.plot()
-
-        ax1.set_ylabel('')
-        ax1.setTitle('')
-        ax1.legend(title='')
+        ax1.yticks(time_in_sphere.keys(), time_in_sphere.items())
+        ax1.set_xlabel('Hours spent')
+        ax1.setTitle('The activity in thr monitored categories')
 
 
         top_programms, bar_labels, time, bar_colors = [], [], [], []
