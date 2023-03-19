@@ -10,17 +10,16 @@ import threading
 from json import load
 
 timer = 60
+log = Log('log')
 
 def main():
     global NonTrack, log, killMeProcesses, types
     with open(f'appData/processes/NonTrack.conf', 'r', encoding='utf-8') as file:
         NonTrack = file.read().splitlines()
-        print(NonTrack)
     with open(f'appData/processes/killMeProcesses.conf', 'r', encoding='utf-8') as file:
         killMeProcesses = file.read().splitlines()
     with open(f'appData/processes/types.json', 'r', encoding='utf-8') as file:
         types = load(file)
-    log = Log('log')
     _PID = commandExecutionP('tasklist /FO CSV')
     PidSave(_PID)
     while (True):
@@ -37,7 +36,7 @@ def PidRead():
 
 def PidSave(_PID):
     global types
-    for line in _PID:
+    for line in _PID:        
         line = line.replace('"', '').split(',')
         if len(line) > 1: 
             if line[3] != '0' and not line[0][:-4] in NonTrack: 
@@ -46,7 +45,6 @@ def PidSave(_PID):
                         log.logs.update({line[0][:-4]: [types[line[0][:-4]], 0, line[1]]})
                     else:
                         app = QApplication(argv)
-                        print(line[0][:-4])
                         dialog = DialogWindow(line[0][:-4], log, types)
                         dialog.resize(400, 300)
                         dialog.show()
@@ -54,7 +52,9 @@ def PidSave(_PID):
                         if dialog.process_added:
                             types = dialog.types
                             log.logs.update({line[0][:-4]: [types[line[0][:-4]], 0, line[1]]})
-                        print(log.logs)
+                            print(list(types.keys())[-1])
+                        else:
+                            NonTrack.append(line[0][:-4])
                         del dialog
                         del app
                 elif log.logs[line[0][:-4]][2] == line[1]:

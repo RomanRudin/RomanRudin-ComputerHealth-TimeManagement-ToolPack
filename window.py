@@ -36,14 +36,15 @@ class Window(QWidget):
         self.settings.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.settings.clicked.connect(self.show_settings)
 
+        self.main_layout.addLayout(self.button_layout)
+
         self.date = QLabel(WEEKDAY_LIST[datetime.today().weekday() - 1])
         self.main_layout.addWidget(self.health)
         self.date.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.content = QWidget()
+        self.content = Management()
         self.main_layout.addWidget(self.content)
         self.content.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-
-        self.main_layout.addLayout(self.button_layout)
+        self.content.show()
 
         self.setLayout(self.main_layout)
 
@@ -65,6 +66,6 @@ class Window(QWidget):
 if __name__ == "__main__":
     app = QApplication([argv]) 
     main = Window()
-    main.resize(600, 400)
+    main.resize(1200, 800)
     main.show()        
     exit(app.exec_())

@@ -1,17 +1,3 @@
 {
-    "€¬п ®Ў": "TYPE",
-    "NVDisplay.Container": "Tool",
-    "StartMenuExperienceHost": "Tool",
-    "RuntimeBroker": "Code",
-    "Discord": "Social Network",
-    "msedge": "Browser",
-    "DeepL": "Tool",
-    "ShellExperienceHost": "Code",
-    "ApplicationFrameHost": "Code",
-    "Code": "Code",
-    "WindowsInternal.ComposableShell.Experiences.TextInput.InputApp": "Game",
-    "node": "Tool",
-    "steam": "Entartainment",
-    "notepad": "Tool",
-    "Telegram": "Social Network"
+    "nvcontainer": "Game"
 }
