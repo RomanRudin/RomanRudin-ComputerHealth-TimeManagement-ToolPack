@@ -1,3 +1,4 @@
+from asyncio import tasks
 from sys import argv, exit
 from time import sleep, time
 from PyQt5.QtWidgets import QApplication
@@ -9,7 +10,7 @@ from DialogWindow import DialogWindow
 import threading
 from json import load
 
-timer = 60
+timer = 5
 log = Log('log')
 
 def main():
@@ -20,23 +21,16 @@ def main():
         killMeProcesses = file.read().splitlines()
     with open(f'appData/processes/types.json', 'r', encoding='utf-8') as file:
         types = load(file)
-    _PID = commandExecutionP('tasklist /FO CSV')
-    PidSave(_PID)
+    tasksSave()
     while (True):
-        thread = threading.Thread(target= PidRead)
+        thread = threading.Thread(target= tasksSave)
         thread.start()
         sleep(timer)
 
-
-def PidRead():
-    _PID = commandExecutionP('tasklist /FO CSV')
-    d = str(date.today())
-    t = str(datetime.today().strftime("%H:%M:%S"))
-    PidSave(_PID)
-
-def PidSave(_PID):
+def tasksSave():
     global types
-    for line in _PID:        
+    tasks = commandExecutionP('tasklist /FO CSV')
+    for line in tasks:        
         line = line.replace('"', '').split(',')
         if len(line) > 1: 
             if line[3] != '0' and not line[0][:-4] in NonTrack: 

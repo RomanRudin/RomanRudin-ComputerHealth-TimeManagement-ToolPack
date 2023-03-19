@@ -44,6 +44,7 @@ class Management(QWidget):
             changes = QListWidget()
             changes_layout.addWidget(changes)
             changes.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            changes.addItems()
 
         self.setLayout(main_layout)
         self.plot()
@@ -74,7 +75,7 @@ class Management(QWidget):
 
 
         top_programms, bar_labels, time, bar_colors = [], [], [], []
-        for i in range(1, 11):
+        for i in range(10):
             try:
                 values = list(log.logs.values())[i]
                 top_programms.append(list(log.logs.keys())[i].strip())

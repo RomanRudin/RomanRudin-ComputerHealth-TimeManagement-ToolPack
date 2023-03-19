@@ -32,7 +32,7 @@ class Window(QWidget):
             self.health.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             self.health.clicked.connect(self.show_health)
         self.settings = QPushButton('settings')
-        self.button_layout.addWidget(self.settings, stretch=3)
+        self.button_layout.addWidget(self.settings, stretch=1)
         self.settings.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.settings.clicked.connect(self.show_settings)
 
@@ -41,27 +41,32 @@ class Window(QWidget):
         self.date = QLabel(WEEKDAY_LIST[datetime.today().weekday() - 1])
         self.main_layout.addWidget(self.health)
         self.date.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.content = Management()
-        self.main_layout.addWidget(self.content)
-        self.content.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.content.show()
+        self.content = QWidget()
+        self.refresh()
 
         self.setLayout(self.main_layout)
 
 
+    def refresh(self):
+        self.main_layout.addWidget(self.content)
+        self.content.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.content.show()
+
     def show_schedule(self):
         self.content = Schedule()
-
+        self.refresh()
 
     def show_management(self):
         self.content = Management()
-
+        self.refresh()
 
     def show_health(self):
         self.content = Health()
+        self.refresh()
 
     def show_settings(self):
         self.content = Settings()
+        self.refresh()
 
 if __name__ == "__main__":
     app = QApplication([argv]) 

@@ -1,7 +1,7 @@
 Game = True
 Entartainment = False
 Code = True
-Learning = False
+Learning = True
 Browser = False
 Social Network = False
-Tool = True
+Tool = False

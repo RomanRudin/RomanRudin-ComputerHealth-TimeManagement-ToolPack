@@ -20,8 +20,8 @@ class DialogWindow(QWidget):
         self.list = QComboBox()
         main_layout.addWidget(self.list, stretch=2)
         self.list.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.list.addItems(PROCESS_TYPES)
         self.list.addItem('System')
+        self.list.addItems(PROCESS_TYPES)
 
         self.ok = QPushButton('OK')
         self.ok.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)

@@ -21,7 +21,7 @@ if SCHEDULE:
 
 if MANAGEMENT:
     with open(f'appData/settings/management/norm.txt', encoding='utf-8') as file:
-        BARS = [type_[:type_.find(' = ')] for type_ in file.read().splitlines() if type_[type_.find(' = '):]]
+        BARS = [type_[:type_.find(' = ')] for type_ in file.read().splitlines() if normal_reader(type_[type_.find(' = ') + 3:])]
 
 
 if HEALTH:
