@@ -44,7 +44,6 @@ class Management(QWidget):
             changes = QListWidget()
             changes_layout.addWidget(changes)
             changes.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            changes.addItems()
 
         self.setLayout(main_layout)
         self.plot()
