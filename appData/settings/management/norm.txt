@@ -4,4 +4,4 @@ Code = True
 Learning = False
 Browser = False
 Social Network = False
-Tools = True
+Tool = True

@@ -1,0 +1,15 @@
+TYPE 	 3240 	 €¬п ®Ў 	 PID 
+Tool 	 3240 	 NVDisplay.Container 	 2176 
+Tool 	 3240 	 StartMenuExperienceHost 	 6468 
+Code 	 3240 	 RuntimeBroker 	 6656 
+Social Network 	 3240 	 Discord 	 8244 
+Browser 	 3240 	 msedge 	 9108 
+Tool 	 3240 	 DeepL 	 10784 
+Code 	 3240 	 ShellExperienceHost 	 12976 
+Code 	 3240 	 ApplicationFrameHost 	 5324 
+Code 	 3240 	 Code 	 8656 
+Game 	 3240 	 WindowsInternal.ComposableShell.Experiences.TextInput.InputApp 	 7884 
+Tool 	 3240 	 node 	 13004 
+Entartainment 	 3240 	 steam 	 15276 
+Social Network 	 3000 	 Telegram 	 4648 
+Tool 	 2580 	 notepad 	 13684 

@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget
 
 class Health(QWidget):
-    pass
+    def __init__(self) -> None:
+        super().__init__()

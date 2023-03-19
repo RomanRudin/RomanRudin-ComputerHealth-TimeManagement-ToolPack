@@ -10,7 +10,8 @@ from appData.settings.settings_parser import SCHEDULE, HEALTH, MANAGEMENT
 from sys import argv, exit
 
 class Window(QWidget):
-    def __init__(self):
+    def __init__(self) -> None:
+        super().__init__()
         self.main_layout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
 

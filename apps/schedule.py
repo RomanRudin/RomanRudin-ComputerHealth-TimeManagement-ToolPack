@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget
 
 class Schedule(QWidget):
-    pass
+    def __init__(Self) -> None:
+        super().__init__()

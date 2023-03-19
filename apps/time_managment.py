@@ -8,11 +8,9 @@ from random import randint
 from main import log
 from appData.settings.settings_parser import BARS
 
-class Helper(QWidget):
-    pass
-
 class Management(QWidget):
-    def __init__(self):
+    def __init__(self) -> None:
+        super().__init__()
         main_layout = QVBoxLayout()
         changes_layout = QVBoxLayout()
         main_statistic_layout = QHBoxLayout()
@@ -34,7 +32,7 @@ class Management(QWidget):
             'Learning': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
             'Browser': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
             'Social Network': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
-            'Tools': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
+            'Tool': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
         }
 
         self.changes_list = []
