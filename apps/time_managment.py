@@ -50,7 +50,7 @@ class Management(QWidget):
 
 
     def refresh(self):
-        self.plot()
+        pass
 
 
     def plot(self):
@@ -68,7 +68,6 @@ class Management(QWidget):
         #TODO make a plot-marker for changeable markers. Firstly I'll need to make a function, that will count those markers
         ax1.plot(list(time_in_sphere.values()), list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
 
-        #ax1.yticks(list(time_in_sphere.keys()), list(time_in_sphere.items()))
         ax1.set_xlabel('Hours spent')
         ax1.set_title('The activity in thr monitored categories')
 
@@ -78,7 +77,7 @@ class Management(QWidget):
             try:
                 values = list(log.logs.values())[i]
                 top_programms.append(list(log.logs.keys())[i].strip())
-                if values[0] not in bar_labels:
+                if values[0] not in bar_labels: 
                     bar_labels.append(values[0].strip())
                 else:
                     bar_labels.append('_' + values[0].strip())

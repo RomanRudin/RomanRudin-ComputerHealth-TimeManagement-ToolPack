@@ -29,5 +29,7 @@ class Log():
     def __read(self):
         if path.exists(self.path):
             with open(self.path, 'r', encoding='utf-8') as file:
-                return {process.strip(): [type_.strip(), int(time.strip()), id.strip()]  for type_, time, process, id in (line.strip().split('\t') for line in file.read().splitlines())}
+                return {process.strip(): [type_.strip(), int(time.strip()), id.strip()] \
+                    for type_, time, process, id in (line.strip().split('\t') \
+                    for line in file.read().splitlines())}
         return {}
