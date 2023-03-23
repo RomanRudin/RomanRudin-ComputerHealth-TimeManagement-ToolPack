@@ -30,8 +30,9 @@ if SCHEDULE:
 
 if MANAGEMENT:
     with open('appData/settings/management/norm.txt', encoding='utf-8') as file:
-        BARS = [type_[:type_.find(' = ')] for type_ in file.read().splitlines() if equality_parser(type_, True)]
-        ALL_BARS = [type_[:type_.find(' = ')] for type_ in file.read().splitlines()]
+        date = file.read().splitlines()
+        BARS = [type_[:type_.find(' = ')] for type_ in date if equality_parser(type_, True)]
+        ALL_BARS = [type_[:type_.find(' = ')] for type_ in date]
 
     with open('appData/settings/management/formula.txt', encoding='utf-8') as file:
         data = file.read().splitlines()

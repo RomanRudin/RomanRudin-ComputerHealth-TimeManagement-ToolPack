@@ -69,8 +69,12 @@ class Window(QWidget):
         self.refresh()
 
 if __name__ == "__main__":
-    app = QApplication([argv]) 
-    main = Window()
-    main.resize(1200, 800)
-    main.show()        
-    exit(app.exec_())
+    try:
+        app = QApplication([argv]) 
+        main = Window()
+        main.resize(1200, 800)
+        main.show()        
+        exit(app.exec_())
+    except Exception as e:
+        with open('debug_log.txt', 'w') as file:
+            file.write(str(e))

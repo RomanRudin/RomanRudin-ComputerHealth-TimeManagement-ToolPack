@@ -1,0 +1,7 @@
+Social Network 	 45 	 Discord 	 6928 
+Entartainment 	 45 	 steam 	 8932 
+Browser 	 45 	 msedge 	 3652 
+Tool 	 45 	 DeepL 	 8724 
+Learning 	 45 	 chrome 	 10696 
+Code 	 45 	 Code 	 12804 
+Code 	 0 	 git 	 12528 

@@ -1,4 +1,4 @@
-from turtle import color
+from datetime import date
 from PyQt5.QtWidgets import QWidget, QListWidget, QVBoxLayout, QHBoxLayout, QSizePolicy
 from matplotlib import colors
 import matplotlib.pyplot as plt
@@ -7,6 +7,7 @@ from appData.constants.constants import BAR1_COLORS, BAR2_COLORS
 from random import randint
 from main import log
 from appData.settings.settings_parser import BARS, CONSUMPTION_RECALCULATOR, NORM_SCHEDULE
+from apps.norm_recalcuulator import norm_recalculating
 
 class Management(QWidget):
     def __init__(self) -> None:
@@ -41,11 +42,13 @@ class Management(QWidget):
 
 
         if CONSUMPTION_RECALCULATOR:
-            self.changes_list = []
+            self.recalculated_norm = norm_recalculating()
             for bar in BARS:
                 changes = QListWidget()
                 changes_layout.addWidget(changes)
                 changes.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+                changes.addItems(value for key, value in self.recalculated_norm[bar].items() if key != 'sum' )
+            main_statistic_layout.addLayout(changes_layout)
 
         self.setLayout(main_layout)
         self.plot()
@@ -66,10 +69,12 @@ class Management(QWidget):
         time_in_sphere = {bar: sum(data[1] for data in log.logs.values() if data[0] == bar) for bar in BARS}
 
         ax1.barh(list(time_in_sphere.keys()), list(time_in_sphere.values()), align='center', alpha=0.4, color=BAR1_COLORS)
-        ax1.plot(list(time_in_sphere.values()), list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='green')
+        ax1.plot([NORM_SCHEDULE[str(date.today().weekday())][bar] for bar in list(time_in_sphere.keys())], list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='green')
         #TODO make a plot-marker for changeable markers. Firstly I'll need to make a function, that will count those markers
         if CONSUMPTION_RECALCULATOR:
-            ax1.plot(list(time_in_sphere.values()), list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
+            recalculated_norm_list = [NORM_SCHEDULE[str(date.today().weekday())][bar] - self.recalculated_norm[bar]['sum'] for bar in list(time_in_sphere.keys())]
+            recalculated_norm_list = [ num if num > 0 else 0 for num in recalculated_norm_list]
+            ax1.plot(recalculated_norm_list, list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
 
         ax1.set_xlabel('Hours spent')
         ax1.set_title('The activity in thr monitored categories')
@@ -84,7 +89,7 @@ class Management(QWidget):
                     bar_labels.append(values[0].strip())
                 else:
                     bar_labels.append('_' + values[0].strip())
-                time.append(int(values[1]) // 600)
+                time.append(int(values[1]) / 60)
                 bar_colors.append(self.color_data[values[0].strip()])
             except IndexError:
                 break
