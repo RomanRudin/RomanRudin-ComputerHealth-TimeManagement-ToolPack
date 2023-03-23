@@ -1,6 +1,5 @@
-from datetime import datetime, date
-from os import system, popen, makedirs, path
-from venv import create
+from datetime import date
+from os import makedirs, path
 
 class Log():
     def __init__(self, dir) -> None:

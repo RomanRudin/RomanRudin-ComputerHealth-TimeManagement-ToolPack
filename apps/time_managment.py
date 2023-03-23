@@ -6,7 +6,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from appData.constants.constants import BAR1_COLORS, BAR2_COLORS
 from random import randint
 from main import log
-from appData.settings.settings_parser import BARS
+from appData.settings.settings_parser import BARS, CONSUMPTION_RECALCULATOR, NORM_SCHEDULE
 
 class Management(QWidget):
     def __init__(self) -> None:
@@ -39,11 +39,13 @@ class Management(QWidget):
             'Tool': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
         }
 
-        self.changes_list = []
-        for bar in BARS:
-            changes = QListWidget()
-            changes_layout.addWidget(changes)
-            changes.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        if CONSUMPTION_RECALCULATOR:
+            self.changes_list = []
+            for bar in BARS:
+                changes = QListWidget()
+                changes_layout.addWidget(changes)
+                changes.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.setLayout(main_layout)
         self.plot()
@@ -66,7 +68,8 @@ class Management(QWidget):
         ax1.barh(list(time_in_sphere.keys()), list(time_in_sphere.values()), align='center', alpha=0.4, color=BAR1_COLORS)
         ax1.plot(list(time_in_sphere.values()), list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='green')
         #TODO make a plot-marker for changeable markers. Firstly I'll need to make a function, that will count those markers
-        ax1.plot(list(time_in_sphere.values()), list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
+        if CONSUMPTION_RECALCULATOR:
+            ax1.plot(list(time_in_sphere.values()), list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
 
         ax1.set_xlabel('Hours spent')
         ax1.set_title('The activity in thr monitored categories')
