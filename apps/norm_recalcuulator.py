@@ -36,7 +36,7 @@ def norm_recalculating():
                     were working. We take lines in reader, split them into type_ and time (we don't really need
                     other variables) and, if type_ is the same with bar - we take time to sum().
                     '''
-                    full_consumption_list[bar][str(day)] = 0 - sum(int(time.strip()) \
+                    full_consumption_list[bar][str(day)] = 0 - sum(int(time.strip()) / 60 \
                         for type_, time, _process, _id in (line.strip().split('\t') \
                         for line in reader) if type_.strip() == bar) \
                         + NORM_SCHEDULE[weekday][bar]

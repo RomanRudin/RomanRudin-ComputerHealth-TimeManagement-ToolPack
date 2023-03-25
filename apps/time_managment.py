@@ -66,7 +66,7 @@ class Management(QWidget):
         ax2 = self.statistic_of_programms.add_subplot(111)
 
 
-        time_in_sphere = {bar: sum(data[1] for data in log.logs.values() if data[0] == bar) for bar in BARS}
+        time_in_sphere = {bar: sum(data[1] / 60 for data in log.logs.values() if data[0] == bar) for bar in BARS}
 
         ax1.barh(list(time_in_sphere.keys()), list(time_in_sphere.values()), align='center', alpha=0.4, color=BAR1_COLORS)
         ax1.plot([NORM_SCHEDULE[str(date.today().weekday())][bar] for bar in list(time_in_sphere.keys())], list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='green')

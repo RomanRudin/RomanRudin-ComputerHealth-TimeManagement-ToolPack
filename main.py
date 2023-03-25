@@ -10,7 +10,7 @@ from DialogWindow import DialogWindow
 import threading
 from json import load
 
-timer = 2
+timer = 30
 log = Log('log')
 
 def main():

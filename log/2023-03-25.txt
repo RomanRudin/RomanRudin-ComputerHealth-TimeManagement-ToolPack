@@ -1,0 +1,7 @@
+Social Network 	 7800 	 Discord 	 2696 
+Entartainment 	 7800 	 steam 	 8204 
+Browser 	 7800 	 msedge 	 10072 
+Tool 	 7800 	 DeepL 	 11544 
+Code 	 7800 	 Code 	 12732 
+Game 	 7710 	 Cities 	 12764 
+Game 	 0 	 Paradox Launcher 	 3392 
