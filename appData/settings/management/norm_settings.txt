@@ -1,0 +1,7 @@
+Game =              Straight,   Stopable
+Entartainment =     Straight,   Stopable
+Code =              Reversed,   Unstopable
+Learning =          Reversed,   Unstopable
+Browser =           Straight,   Untopable
+Social Network =    Straight,   Stopable
+Tool =              Straight,   Unstopable

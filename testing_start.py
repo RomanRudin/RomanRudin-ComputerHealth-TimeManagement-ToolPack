@@ -5,6 +5,6 @@ from main import timer
 
 background = Popen([executable, 'main.py'])
 programm = Popen([executable, 'window.py'])
-sleep(timer * 2)
+sleep(timer - 5)
 background.kill()
 programm.kill()

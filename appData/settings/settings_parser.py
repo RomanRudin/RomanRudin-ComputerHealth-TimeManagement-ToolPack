@@ -30,18 +30,24 @@ if SCHEDULE:
 
 if MANAGEMENT:
     with open('appData/settings/management/norm.txt', encoding='utf-8') as file:
-        date = file.read().splitlines()
-        BARS = [type_[:type_.find(' = ')] for type_ in date if equality_parser(type_, True)]
-        ALL_BARS = [type_[:type_.find(' = ')] for type_ in date]
+        data = file.read().splitlines()
+        BARS = [type_[:type_.find(' = ')] for type_ in data if equality_parser(type_, True)]
+        ALL_BARS = [type_[:type_.find(' = ')] for type_ in data]
 
     with open('appData/settings/management/formula.txt', encoding='utf-8') as file:
         data = file.read().splitlines()
         CONSUMPTION_RECALCULATOR = equality_parser(data[0], True)
-        if CONSUMPTION_RECALCULATOR:
-            DAYS_OVERCONSUMPTION, OVERCONSUMPTION_FORMULA = int(equality_parser(data[2])), equality_parser(data[3])
-            DAYS_UNDERCONSUMPTION, UNDERCONSUMPTION_FORMULA = int(equality_parser(data[5])), equality_parser(data[6])
-            with open('appData/settings/management/norm_schedule.json', encoding='utf-8') as file:
-                NORM_SCHEDULE = load(file)
+    if CONSUMPTION_RECALCULATOR:
+        DAYS_OVERCONSUMPTION, OVERCONSUMPTION_FORMULA = int(equality_parser(data[2])), equality_parser(data[3])
+        DAYS_UNDERCONSUMPTION, UNDERCONSUMPTION_FORMULA = int(equality_parser(data[5])), equality_parser(data[6])
+        with open('appData/settings/management/norm_schedule.json', encoding='utf-8') as file:
+            NORM_SCHEDULE = load(file)
+        with open('appData/settings/management/norm_settings.txt', encoding='utf-8') as file:
+            data = file.read().splitlines()
+            NORM_SETTINGS = {type_[:type_.find(' = ')]:{} for type_ in data} 
+            for index, bar in enumerate(NORM_SETTINGS.keys()):
+                NORM_SETTINGS[bar] = {'bar_type': True if equality_parser(data[index]).split(',')[0].strip() == 'Straight' else False, \
+                    'is_stopable': True if equality_parser(data[index]).split(',')[1].strip() == 'Stopable' else False}
 
 
 if HEALTH:

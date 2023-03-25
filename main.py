@@ -1,8 +1,6 @@
-from asyncio import tasks
-from sys import argv, exit
-from time import sleep, time
+from sys import argv
+from time import sleep
 from PyQt5.QtWidgets import QApplication
-from datetime import datetime, date
 from apps.logger import *
 from apps.module import *
 from appData.settings.settings_parser import MANAGEMENT
@@ -46,13 +44,14 @@ def tasksSave():
                         if dialog.process_added:
                             types = dialog.types
                             log.logs.update({line[0][:-4]: [types[line[0][:-4]], 0, line[1]]})
-                            print(list(types.keys())[-1])
                         else:
                             NonTrack.append(line[0][:-4])
                         del dialog
                         del app
                 elif log.logs[line[0][:-4]][2] == line[1]:
                     log.logs[line[0][:-4]][1] += timer
+                elif log.logs[line[0][:-4]][2] != line[1] and log.new_session:
+                    log.logs[line[0][:-4]][2] = line[1]
             elif line[0] in killMeProcesses: 
                 commandExecution('taskkill /PID ' + line[1])
     log.write()

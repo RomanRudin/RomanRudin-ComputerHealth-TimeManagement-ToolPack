@@ -7,6 +7,7 @@ class Log():
         self.path = f'{dir}/{date.today()}.txt'
         self.types = f''
         self.logs = self.__read()
+        self.new_session = True
         '''
         {
             procces: [type, time, id],
@@ -14,6 +15,7 @@ class Log():
         '''
 
     def write(self):
+        self.new_session = False
         if not path.exists(self.dir):
             makedirs(self.dir)
         with open(self.path, 'w', encoding='utf-8') as file:
@@ -31,4 +33,5 @@ class Log():
                 return {process.strip(): [type_.strip(), int(time.strip()), id.strip()] \
                     for type_, time, process, id in (line.strip().split('\t') \
                     for line in file.read().splitlines())}
+
         return {}
