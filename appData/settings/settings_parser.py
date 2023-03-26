@@ -46,8 +46,10 @@ if MANAGEMENT:
             data = file.read().splitlines()
             NORM_SETTINGS = {type_[:type_.find(' = ')]:{} for type_ in data} 
             for index, bar in enumerate(NORM_SETTINGS.keys()):
-                NORM_SETTINGS[bar] = {'bar_type': True if equality_parser(data[index]).split(',')[0].strip() == 'Straight' else False, \
-                    'is_stopable': True if equality_parser(data[index]).split(',')[1].strip() == 'Stopable' else False}
+                line = equality_parser(data[index]).split(',')
+                NORM_SETTINGS[bar] = {'bar_type': True if line[0].strip() == 'Straight' else False, \
+                    'is_stopable': True if line[1].strip() == 'Stopable' else False, \
+                    'stop-time': int(line[2].strip())}
 
 
 if HEALTH:

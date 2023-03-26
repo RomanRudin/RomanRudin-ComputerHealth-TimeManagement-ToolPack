@@ -60,6 +60,6 @@ def norm_recalculating():
                     elif summ > 0 and day <= DAYS_UNDERCONSUMPTION - 1:
                         consumption_list[bar][day] = formula_reader(UNDERCONSUMPTION_FORMULA, summ, day)
             consumption_list[bar]['sum'] = sum(int(value) for value in consumption_list[bar].values())
-    
+            
     return consumption_list
                 

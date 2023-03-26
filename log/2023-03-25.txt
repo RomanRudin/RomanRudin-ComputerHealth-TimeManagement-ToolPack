@@ -1,8 +1,10 @@
-Browser 	 9530 	 msedge 	 7744 
-Social Network 	 9245 	 Discord 	 9708 
-Entartainment 	 8850 	 steam 	 8324 
-Tool 	 8850 	 DeepL 	 11912 
-Code 	 8830 	 Code 	 5032 
+Social Network 	 11435 	 Discord 	 9708 
+Entartainment 	 11130 	 steam 	 8324 
+Code 	 11020 	 Code 	 5032 
+Browser 	 10940 	 msedge 	 1868 
+Tool 	 10770 	 DeepL 	 11912 
 Game 	 7710 	 Cities 	 12764 
+Game 	 2190 	 csgo 	 5176 
 Code 	 65 	 git 	 13464 
 Game 	 0 	 Paradox Launcher 	 3392 
+Tool 	 0 	 obs64 	 6064 

@@ -1,7 +1,7 @@
-Game =              Straight,   Stopable
-Entartainment =     Straight,   Stopable
-Code =              Reversed,   Unstopable
-Learning =          Reversed,   Unstopable
-Browser =           Straight,   Untopable
-Social Network =    Straight,   Stopable
-Tool =              Straight,   Unstopable
+Game =              Straight,   Stopable,   60
+Entartainment =     Straight,   Stopable,   60
+Code =              Reversed,   Unstopable, 60
+Learning =          Straight,   Stopable, 0
+Browser =           Straight,   Untopable,  60
+Social Network =    Straight,   Stopable,   60
+Tool =              Straight,   Unstopable, 60
