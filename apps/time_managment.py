@@ -69,14 +69,14 @@ class Management(QWidget):
         time_in_sphere = {bar: sum(data[1] / 3600 for data in log.logs.values() if data[0] == bar) for bar in BARS}
 
         ax1.barh(list(time_in_sphere.keys()), list(time_in_sphere.values()), align='center', alpha=0.4, color=BAR1_COLORS)
-        ax1.plot([NORM_SCHEDULE[str(date.today().weekday())][bar] / 60 for bar in list(time_in_sphere.keys())], list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='green')
+        ax1.plot([NORM_SCHEDULE[str(date.today().weekday())][bar] / 60 for bar in list(time_in_sphere.keys())], list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
         #TODO make a plot-marker for changeable markers. Firstly I'll need to make a function, that will count those markers
         if CONSUMPTION_RECALCULATOR:
             recalculated_norm_list = [(NORM_SCHEDULE[str(date.today().weekday())][bar] - self.recalculated_norm[bar]['sum']) if NORM_SETTINGS[bar]['bar_type'] \
                 else (NORM_SCHEDULE[str(date.today().weekday())][bar] + self.recalculated_norm[bar]['sum']) \
                 for bar in list(time_in_sphere.keys())]
             recalculated_norm_list = [num / 60 if num > 0 else 0 for num in recalculated_norm_list]
-            ax1.plot(recalculated_norm_list, list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
+            ax1.plot(recalculated_norm_list, list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='green')
 
         ax1.set_xlabel('Hours spent')
         ax1.set_title('The activity in thr monitored categories')

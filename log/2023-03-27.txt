@@ -1,0 +1,8 @@
+Entartainment 	 10380 	 steam 	 5040 
+Social Network 	 10230 	 Discord 	 4800 
+Code 	 10230 	 Code 	 15676 
+Tool 	 9990 	 DeepL 	 12968 
+Game 	 4980 	 csgo 	 13016 
+Tool 	 4410 	 obs64 	 12080 
+Tool 	 4410 	 Soundpad 	 10192 
+Browser 	 150 	 msedge 	 1120 

@@ -1,0 +1,6 @@
+Social Network 	 480 	 Discord 	 10212 
+Entartainment 	 480 	 steam 	 8828 
+Browser 	 480 	 msedge 	 15600 
+Tool 	 480 	 DeepL 	 12180 
+Code 	 450 	 Code 	 13204 
+Code 	 0 	 git 	 864 

@@ -1,0 +1,5 @@
+Social Network 	 450 	 Discord 	 9632 
+Entartainment 	 450 	 steam 	 9100 
+Browser 	 300 	 msedge 	 3732 
+Tool 	 300 	 DeepL 	 11308 
+Code 	 300 	 Code 	 12596 

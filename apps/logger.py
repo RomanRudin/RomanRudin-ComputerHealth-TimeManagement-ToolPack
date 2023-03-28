@@ -24,6 +24,7 @@ class Log():
             for process, data in self.logs.items():
                 text += f'{str(data[0])} \t {str(data[1])} \t {str(process)} \t {str(data[2])} \n' 
             file.write(text)
+            print(text)
 
 
 

@@ -25,7 +25,9 @@ with open('appData/settings/config.txt', encoding='utf-8') as file:
 
 if SCHEDULE:
     with open('appData/settings/schedule/schedule.json') as file:
-        pass
+        TIMETABLE = load(file)
+    with open('appData/settings/schedule/schedule_settings.txt') as file:
+        SCHEDULE_SETTINGS = file.read().splitlines()
 
 
 if MANAGEMENT:
@@ -53,4 +55,10 @@ if MANAGEMENT:
 
 
 if HEALTH:
-    pass
+    with open('appData/settings/health/norm.txt', encoding='utf-8') as file:
+        data = file.read().splitlines()
+        HEALTH_SETTINHS = {'Special': {}, 'Standart': {}}
+        for line in data:
+            settings = equality_parser(line).split(',')
+            if boolean_reader(settings[1].strip()):
+                HEALTH_SETTINHS[settings[0].strip()][line[:line.find(' = ')]] = 0
