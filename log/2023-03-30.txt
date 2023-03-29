@@ -1,6 +1,6 @@
-Browser 	 1740 	 msedge 	 9996 
-Social Network 	 1740 	 Discord 	 5664 
-Code 	 1740 	 Code 	 13408 
-Entartainment 	 1710 	 steam 	 1232 
-Tool 	 1710 	 DeepL 	 7156 
+Browser 	 1830 	 msedge 	 9996 
+Social Network 	 1830 	 Discord 	 5664 
+Code 	 1830 	 Code 	 13408 
+Entartainment 	 1800 	 steam 	 1232 
+Tool 	 1800 	 DeepL 	 7156 
 Code 	 30 	 git 	 5356 
