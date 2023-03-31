@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 from appData.settings.settings_parser import BARS, ALL_BARS, OVERCONSUMPTION_FORMULA, \
-    UNDERCONSUMPTION_FORMULA, NORM_SCHEDULE, DAYS_OVERCONSUMPTION, DAYS_UNDERCONSUMPTION
+    UNDERCONSUMPTION_FORMULA, NORM_SCHEDULE, DAYS_OVERCONSUMPTION, DAYS_UNDERCONSUMPTION, \
+    NORM_SETTINGS
 from json import load, dump
 from os import path
 
@@ -11,20 +12,27 @@ def formula_reader(formula, main, day):
 
 def norm_recalculating():
     full_consumption_list = {bar:{} for bar in ALL_BARS}
-    consumption_list = {bar:{'sum': 0} for bar in BARS}
+    consumption_list = {bar:{'sum': 0} for bar in ALL_BARS}
 
 
     with open('log/dataLogs/norm_recalculation_data.json', encoding='utf-8') as file:
         data = load(file)
+    with open('log/dataLogs/norm_overhaul_logs.json', encoding='utf-8') as file:
+        norm = load(file)
+        print(norm)
+        print(norm.keys())
 
     max_days = max(DAYS_OVERCONSUMPTION, DAYS_UNDERCONSUMPTION)
 
     if data['date'] != str(date.today()):
         for day in range(max_days):
+            print(day)
             if path.exists(f'log/{date.today() - timedelta(days=day + 1)}.txt'):
                 with open(f'log/{date.today() - timedelta(days=day + 1)}.txt', encoding='utf-8') as file:
                     reader = file.read().splitlines()
                 weekday = str((date.today() - timedelta(days=day + 1)).weekday())
+                logs_day = str(date.today() - timedelta(days=day + 1))
+                print(logs_day)
                 for bar in ALL_BARS:
                     '''
                     I'm so sorry for this line of code...
@@ -37,9 +45,14 @@ def norm_recalculating():
                     other variables) and, if type_ is the same with bar - we take time to sum().
                     '''
                     full_consumption_list[bar][str(day)] = 0 - sum(int(time.strip()) / 60 \
-                        for type_, time, _process, _id in (line.strip().split('\t') \
-                        for line in reader) if type_.strip() == bar) \
-                        + NORM_SCHEDULE[weekday][bar]
+                       for type_, time, _process, _id in (line.strip().split('\t') \
+                       for line in reader) if type_.strip() == bar)\
+                       + NORM_SCHEDULE[weekday][bar]
+                    if logs_day in norm.keys():
+                        if NORM_SETTINGS[bar]['bar_type']:
+                            full_consumption_list[bar][str(day)] -= norm[logs_day][bar]
+                        else:
+                            full_consumption_list[bar][str(day)] += norm[logs_day][bar]
 
         with open('log/dataLogs/norm_recalculation_data.json', 'w', encoding='utf-8') as file:
             full_consumption_list['date'] = str(date.today())
@@ -50,7 +63,7 @@ def norm_recalculating():
         data.pop('date')
         full_consumption_list = data
 
-    for bar in BARS:
+    for bar in ALL_BARS:
         if bar in full_consumption_list.keys():
             for day in range(max_days):
                 if str(day) in full_consumption_list[bar].keys():
@@ -60,6 +73,16 @@ def norm_recalculating():
                     elif summ > 0 and day <= DAYS_UNDERCONSUMPTION - 1:
                         consumption_list[bar][day] = formula_reader(UNDERCONSUMPTION_FORMULA, summ, day)
             consumption_list[bar]['sum'] = sum(int(value) for value in consumption_list[bar].values())
-            
+    
+    with open('log/dataLogs/norm_overhaul_logs.json', 'w', encoding='utf-8') as file:
+        for day in norm.keys():
+            a, b, c = map(int, day.split('-'))
+            if (date.today() - date(a, b, c)).days > 14:
+                norm.pop(day)
+        norm[str(date.today())] = {}
+        for bar in BARS:
+            norm[str(date.today())][bar] = consumption_list[bar]['sum']
+        dump(norm, file, indent=4)
+
     return consumption_list
                 

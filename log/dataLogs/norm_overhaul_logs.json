@@ -1,65 +1,70 @@
 {
-    "0": {
-        "Game": 180,
+    "2023-03-24": {
+        "Game": 0,
         "Entartainment": 0,
-        "Code": 60,
-        "Learning": 20,
+        "Code": 0,
+        "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0
     },
-    "1": {
-        "Game": 120,
+    "2023-03-25": {
+        "Game": 0,
         "Entartainment": 0,
-        "Code": 60,
-        "Learning": 80,
+        "Code": 0,
+        "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0
     },
-    "2": {
-        "Game": 60,
+    "2023-03-26": {
+        "Game": 0,
         "Entartainment": 0,
-        "Code": 30,
-        "Learning": 20,
+        "Code": 0,
+        "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0
     },
-    "3": {
-        "Game": 600,
+    "2023-03-27": {
+        "Game": 0,
         "Entartainment": 0,
-        "Code": 60,
-        "Learning": 80,
+        "Code": 0,
+        "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0
     },
-    "4": {
-        "Game": 60,
+    "2023-03-28": {
+        "Game": 0,
         "Entartainment": 0,
-        "Code": 30,
-        "Learning": 20,
+        "Code": 0,
+        "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0
     },
-    "5": {
-        "Game": 300,
+    "2023-03-29": {
+        "Game": 0,
         "Entartainment": 0,
-        "Code": 120,
-        "Learning": 20,
+        "Code": 0,
+        "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0
     },
-    "6": {
-        "Game": 150,
+    "2023-03-30": {
+        "Game": -225,
         "Entartainment": 0,
-        "Code": 60,
-        "Learning": 120,
+        "Code": 331,
+        "Learning": 4,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0
+    },
+    "2023-03-31": {
+        "Game": -101,
+        "Code": 252,
+        "Learning": 67
     }
 }

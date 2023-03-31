@@ -1,6 +1,17 @@
-Browser 	 1830 	 msedge 	 9996 
-Social Network 	 1830 	 Discord 	 5664 
-Code 	 1830 	 Code 	 13408 
-Entartainment 	 1800 	 steam 	 1232 
-Tool 	 1800 	 DeepL 	 7156 
+Browser 	 49110 	 msedge 	 9996 
+Entartainment 	 46710 	 steam 	 1232 
+Social Network 	 46320 	 Discord 	 5664 
+Code 	 29610 	 Code 	 13408 
+Tool 	 22470 	 DeepL 	 7156 
+Learning 	 12690 	 chrome 	 10544 
+Game 	 10500 	 csgo 	 14984 
+Tool 	 9000 	 obs64 	 14880 
+Game 	 8670 	 Cities 	 8332 
+Game 	 6630 	 Risk of Rain 2 	 13168 
+Social Network 	 1050 	 Telegram 	 12896 
+Tool 	 210 	 notepad 	 12876 
+Tool 	 60 	 Soundpad 	 1184 
 Code 	 30 	 git 	 5356 
+Game 	 30 	 Paradox Launcher 	 14432 
+Tool 	 30 	 WINWORD 	 9192 
+Code 	 30 	 conda 	 4324 

@@ -1,0 +1,10 @@
+Browser 	 17190 	 msedge 	 10052 
+Code 	 16980 	 Code 	 11920 
+Social Network 	 10920 	 Discord 	 5812 
+Entartainment 	 10890 	 steam 	 8332 
+Learning 	 6270 	 chrome 	 7096 
+Social Network 	 3900 	 Telegram 	 12896 
+Game 	 3390 	 csgo 	 14132 
+Tool 	 960 	 obs64 	 8320 
+Tool 	 570 	 DeepL 	 11524 
+Code 	 60 	 git 	 10712 
