@@ -1,0 +1,10 @@
+Social Network 	 11220 	 Discord 	 14532 
+Browser 	 11220 	 msedge 	 8776 
+Code 	 11220 	 Code 	 4764 
+Learning 	 11220 	 chrome 	 15792 
+Entartainment 	 11160 	 steam 	 6292 
+Tool 	 11160 	 DeepL 	 15180 
+Entartainment 	 11160 	 Adobe Premiere Pro 	 8420 
+Tool 	 7020 	 obs64 	 8916 
+Tool 	 180 	 wmplayer 	 11824 
+Code 	 0 	 git 	 16732 

@@ -1,10 +1,14 @@
-Browser 	 17190 	 msedge 	 10052 
-Code 	 16980 	 Code 	 11920 
-Social Network 	 10920 	 Discord 	 5812 
-Entartainment 	 10890 	 steam 	 8332 
-Learning 	 6270 	 chrome 	 7096 
+Browser 	 34980 	 msedge 	 10052 
+Code 	 26670 	 Code 	 11920 
+Social Network 	 23940 	 Discord 	 5812 
+Entartainment 	 21810 	 steam 	 8332 
+Tool 	 11280 	 DeepL 	 11524 
+Tool 	 10950 	 obs64 	 8320 
+Game 	 9150 	 csgo 	 14132 
+Learning 	 8850 	 chrome 	 7096 
+Learning 	 4200 	 Zoom 	 12328 
 Social Network 	 3900 	 Telegram 	 12896 
-Game 	 3390 	 csgo 	 14132 
-Tool 	 960 	 obs64 	 8320 
-Tool 	 570 	 DeepL 	 11524 
+Entartainment 	 2130 	 Adobe Premiere Pro 	 10748 
+Tool 	 240 	 Soundpad 	 3752 
 Code 	 60 	 git 	 10712 
+Tool 	 0 	 wmplayer 	 12632 

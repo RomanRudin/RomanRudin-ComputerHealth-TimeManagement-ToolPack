@@ -64,7 +64,38 @@
     },
     "2023-03-31": {
         "Game": -101,
+        "Entartainment": 0,
         "Code": 252,
-        "Learning": 67
+        "Learning": 67,
+        "Browser": 0,
+        "Social Network": 0,
+        "Tool": 0
+    },
+    "2023-04-01": {
+        "Game": -55,
+        "Entartainment": 1003,
+        "Code": 322,
+        "Learning": 163,
+        "Browser": 1108,
+        "Social Network": 1073,
+        "Tool": 824
+    },
+    "2023-04-02": {
+        "Game": -135,
+        "Entartainment": 2139,
+        "Code": 394,
+        "Learning": 68,
+        "Browser": 2158,
+        "Social Network": 2095,
+        "Tool": 1448
+    },
+    "2023-04-03": {
+        "Game": -138,
+        "Entartainment": 4022,
+        "Code": 178,
+        "Learning": 231,
+        "Browser": 3769,
+        "Social Network": 3642,
+        "Tool": 2815
     }
 }

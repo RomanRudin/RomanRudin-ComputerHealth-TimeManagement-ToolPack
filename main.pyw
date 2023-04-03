@@ -11,20 +11,21 @@ from json import load
 
 time_counter = {}
 bars_in_count = []
-
-if CONSUMPTION_RECALCULATOR and MANAGEMENT:
-    from appData.settings.settings_parser import ALL_BARS, NORM_SETTINGS, NORM_SCHEDULE
-    from apps.norm_recalcuulator import norm_recalculating
-    consumption_list = norm_recalculating()
-    consumption_list = {bar: consumption_list[bar]['sum'] for bar in consumption_list.keys()}
-    for bar in ALL_BARS:
-        if NORM_SETTINGS[bar]['is_stopable'] and bar in BARS:
-            time_counter[bar] = (NORM_SCHEDULE[str(date.today().weekday())][bar] + NORM_SETTINGS[bar]['stop-time'] - consumption_list[bar]) * 60
-            bars_in_count.append(bar)
+def norm_getting():
+    if CONSUMPTION_RECALCULATOR and MANAGEMENT:
+        from appData.settings.settings_parser import ALL_BARS, NORM_SETTINGS, NORM_SCHEDULE
+        from apps.norm_recalcuulator import norm_recalculating
+        consumption_list = norm_recalculating()
+        consumption_list = {bar: consumption_list[bar]['sum'] for bar in consumption_list.keys()}
+        for bar in ALL_BARS:
+            if NORM_SETTINGS[bar]['is_stopable'] and bar in BARS:
+                time_counter[bar] = (NORM_SCHEDULE[str(date.today().weekday())][bar] + NORM_SETTINGS[bar]['stop-time'] - consumption_list[bar]) * 60
+                bars_in_count.append(bar)
 
 
 
 timer = 60
+norm_counter = 5
 log = Log('log')
 
 def start_programm():
@@ -39,10 +40,15 @@ def start_programm():
     if SCHEDULE:
         pass
     main()
+    norm_getting()
+    counter = 0
     while (True):
         thread = threading.Thread(target= main)
         thread.start()
         sleep(timer)
+        if counter % norm_counter == 0:
+            norm_getting()
+        counter += 1
 
 def main():
     if MANAGEMENT:

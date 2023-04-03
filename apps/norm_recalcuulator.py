@@ -68,10 +68,16 @@ def norm_recalculating():
             for day in range(max_days):
                 if str(day) in full_consumption_list[bar].keys():
                     summ = full_consumption_list[bar][str(day)]
-                    if summ < 0 and day <= DAYS_OVERCONSUMPTION - 1:
-                        consumption_list[bar][day] = formula_reader(OVERCONSUMPTION_FORMULA, abs(summ), day)
-                    elif summ > 0 and day <= DAYS_UNDERCONSUMPTION - 1:
-                        consumption_list[bar][day] = formula_reader(UNDERCONSUMPTION_FORMULA, summ, day)
+                    if not NORM_SETTINGS[bar]['bar_type']:
+                        if summ > 0 and day <= DAYS_UNDERCONSUMPTION - 1:
+                            consumption_list[bar][day] = formula_reader(OVERCONSUMPTION_FORMULA, abs(summ), day)
+                        elif summ < 0 and day <= DAYS_OVERCONSUMPTION - 1:
+                            consumption_list[bar][day] = formula_reader(UNDERCONSUMPTION_FORMULA, summ, day)
+                    else:
+                        if summ < 0 and day <= DAYS_OVERCONSUMPTION - 1:
+                            consumption_list[bar][day] = formula_reader(OVERCONSUMPTION_FORMULA, abs(summ), day)
+                        elif summ > 0 and day <= DAYS_UNDERCONSUMPTION - 1:
+                            consumption_list[bar][day] = formula_reader(UNDERCONSUMPTION_FORMULA, summ, day)
             consumption_list[bar]['sum'] = sum(int(value) for value in consumption_list[bar].values())
     
     with open('log/dataLogs/norm_overhaul_logs.json', 'w', encoding='utf-8') as file:
@@ -80,7 +86,7 @@ def norm_recalculating():
             if (date.today() - date(a, b, c)).days > 14:
                 norm.pop(day)
         norm[str(date.today())] = {}
-        for bar in BARS:
+        for bar in ALL_BARS:
             norm[str(date.today())][bar] = consumption_list[bar]['sum']
         dump(norm, file, indent=4)
 
