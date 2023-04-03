@@ -6,7 +6,7 @@ from apps.time_managment import Management
 from apps.settings_window import Settings
 from apps.module import *
 from appData.constants.constants import WEEKDAY_LIST
-from appData.settings.settings_parser import SCHEDULE, HEALTH, MANAGEMENT
+from appData.settings.settings_parser import SCHEDULE, HEALTH, MANAGEMENT, LEARNING
 from sys import argv, exit
 
 class Window(QWidget):
@@ -31,6 +31,11 @@ class Window(QWidget):
             self.button_layout.addWidget(self.health, stretch=3)
             self.health.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             self.health.clicked.connect(self.show_health)
+        if LEARNING:
+            self.learning = QPushButton('Learning')
+            self.button_layout.addWidget(self.learning, stretch=3)
+            self.learning.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            self.learning.clicked.connect(self.show_learning)
         self.settings = QPushButton('settings')
         self.button_layout.addWidget(self.settings, stretch=1)
         self.settings.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -61,6 +66,10 @@ class Window(QWidget):
         self.refresh()
 
     def show_health(self):
+        self.content = Health()
+        self.refresh()
+
+    def show_learning(self):
         self.content = Health()
         self.refresh()
 

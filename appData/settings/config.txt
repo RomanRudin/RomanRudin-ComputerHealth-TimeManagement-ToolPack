@@ -1,3 +1,4 @@
 Schedule = True
 Management = True
 Health = True
+Learning = True

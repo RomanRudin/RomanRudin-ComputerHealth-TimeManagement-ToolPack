@@ -97,5 +97,14 @@
         "Browser": 3769,
         "Social Network": 3642,
         "Tool": 2815
+    },
+    "2023-04-04": {
+        "Game": -227,
+        "Entartainment": 6660,
+        "Code": 338,
+        "Learning": 158,
+        "Browser": 6025,
+        "Social Network": 5829,
+        "Tool": 4669
     }
 }

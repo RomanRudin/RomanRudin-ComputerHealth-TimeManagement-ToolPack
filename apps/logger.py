@@ -1,6 +1,7 @@
 from datetime import date
 from os import makedirs, path
 
+#main logger, used by main time manager file to save and load data from log files
 class Log():
     def __init__(self, dir) -> None:
         self.dir = dir
