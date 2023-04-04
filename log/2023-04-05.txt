@@ -1,0 +1,6 @@
+Social Network 	 1740 	 Discord 	 10848 
+Browser 	 1740 	 msedge 	 9228 
+Code 	 1740 	 Code 	 12024 
+Entartainment 	 1680 	 steam 	 12812 
+Code 	 120 	 git 	 6468 
+Tool 	 60 	 DeepL 	 8748 

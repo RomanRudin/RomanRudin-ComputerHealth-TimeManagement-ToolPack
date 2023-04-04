@@ -6,11 +6,11 @@ from json import load, dump
 from os import path
 
 
-def formula_reader(formula, main, day):
+def formula_reader(formula, main, day) -> str:
     return str(int(eval(formula.replace('main', str(main)).replace('day',  str(day)))))
 
 
-def norm_recalculating():
+def norm_recalculating() -> dict:
     full_consumption_list = {bar:{} for bar in ALL_BARS}
     consumption_list = {bar:{'sum': 0} for bar in ALL_BARS}
 

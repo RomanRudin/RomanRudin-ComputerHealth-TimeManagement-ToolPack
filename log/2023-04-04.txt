@@ -1,10 +1,10 @@
-Social Network 	 37620 	 Discord 	 7840 
-Browser 	 37620 	 msedge 	 5732 
-Code 	 37560 	 Code 	 10504 
-Entartainment 	 37560 	 steam 	 2900 
-Tool 	 37560 	 DeepL 	 13640 
+Social Network 	 39900 	 Discord 	 7840 
+Browser 	 39900 	 msedge 	 5732 
+Code 	 39840 	 Code 	 10504 
+Entartainment 	 39840 	 steam 	 2900 
+Tool 	 39840 	 DeepL 	 13640 
 Learning 	 3480 	 chrome 	 5612 
 Tool 	 1560 	 obs64 	 10904 
 Game 	 1500 	 csgo 	 14408 
-Code 	 300 	 git 	 9280 
+Code 	 420 	 git 	 9280 
 Entartainment 	 300 	 Adobe Premiere Pro 	 9628 

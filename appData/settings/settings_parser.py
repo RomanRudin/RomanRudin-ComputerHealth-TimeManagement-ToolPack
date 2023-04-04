@@ -41,10 +41,6 @@ if SCHEDULE:
         with open('appData/settings/schedule/schedule.json') as file:
             TIMETABLE = load(file)
     if TASK_LIST_SETTINGS['is_on']:
-        with open('appData/settings/schedule/tasks_log.json') as file:
-            TASK_LIST_SAVED = load(file)
-        with open('appData/settings/schedule/all_tasks.txt') as file:
-            ALL_TASKS = file.read().strip().splitlines()
         with open('appData/settings/schedule/everyday_routine.json') as file:
             TASK_LIST = load(file)
         

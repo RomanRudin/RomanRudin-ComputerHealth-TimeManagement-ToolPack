@@ -10,7 +10,7 @@ from appData.settings.settings_parser import BARS, CONSUMPTION_RECALCULATOR, NOR
 from apps.norm_recalcuulator import norm_recalculating
 
 class Management(QWidget):
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__()
         main_layout = QVBoxLayout()
         changes_layout = QVBoxLayout()

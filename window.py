@@ -8,9 +8,10 @@ from apps.module import *
 from appData.constants.constants import WEEKDAY_LIST
 from appData.settings.settings_parser import SCHEDULE, HEALTH, MANAGEMENT, LEARNING
 from sys import argv, exit
+from apps.pyqt_module import delete_items_of_layout
 
 class Window(QWidget):
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__()
         self.main_layout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
