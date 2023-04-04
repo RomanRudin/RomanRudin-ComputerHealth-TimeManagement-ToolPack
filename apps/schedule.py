@@ -9,7 +9,9 @@ class Schedule(QWidget):
         super().__init__()
         main_layout = QVBoxLayout()
         today_layout = QHBoxLayout()
+        main_layout.addLayout(today_layout)
         tomorrow_layout = QHBoxLayout()
+        main_layout.addLayout(tomorrow_layout)
 
 
         if TIMETABLE_SETTINGS['is_on']:
@@ -43,6 +45,7 @@ class Schedule(QWidget):
                 with open('appData/settings/schedule/tasks_log.json', 'w', encoding='utf-8') as file:
                     TASK_LIST_SAVED['date'] = str(date.today())
                     dump(TASK_LIST_SAVED, file)
+
             self.__construct_task_list(self.task_list_today, TASK_LIST_SAVED['today'])
             self.__construct_task_list(self.task_list_tomorrow, TASK_LIST_SAVED['tomorrow'])      
 
@@ -51,8 +54,46 @@ class Schedule(QWidget):
 
 
 
-    def __construct_timetable(self, parent, **kwargs):
-        for case, time in kwargs.items():
+    def __construct_timetable(self, parent, data):
+        for case, time in data.items():
+            line = QHBoxLayout()
+
+            print(case)
+
+            case_name = QLabel(case)
+            case_name.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            line.addWidget(case_name)
+            time_start = QLabel(str(time[0]))
+            time_start.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            line.addWidget(time_start)
+            time_end = QLabel(str(time[1]))
+            time_end.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            line.addWidget(time_end)
+            del_button = QPushButton()
+            del_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            line.addWidget(del_button)
+            del_button.clicked.connect(lambda: delete_items_of_layout(line))
+
+            parent.addLayout(line)
+        
+        last_line = QHBoxLayout()
+
+        add_once_button = QPushButton()
+        add_once_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        last_line.addWidget(add_once_button)
+        add_once_button.clicked.connect(lambda: self.add_case(parent, True))
+
+        add_button = QPushButton()
+        add_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        last_line.addWidget(add_button)
+        add_button.clicked.connect(lambda: self.add_case(parent, False))
+
+        parent.addLayout(last_line)
+        print(parent.children())
+
+
+    def __construct_task_list(self, parent, data): #TODO
+        for case, time in data.items():
             line = QHBoxLayout()
 
             case_name = QLabel(case)
@@ -71,53 +112,18 @@ class Schedule(QWidget):
 
             parent.addLayout(line)
         
-        line = QHBoxLayout()
-
+        last_line = QHBoxLayout()
         add_once_button = QPushButton()
         add_once_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        line.addWidget(add_once_button)
+        last_line.addWidget(add_once_button)
         add_once_button.clicked.connect(lambda: self.add_case(parent, True))
 
         add_button = QPushButton()
         add_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        line.addWidget(add_button)
+        last_line.addWidget(add_button)
         add_button.clicked.connect(lambda: self.add_case(parent, False))
 
-        parent.addLayout(line)
-
-
-    def __construct_task_list(self, parent, **kwargs): #TODO
-        for case, time in kwargs.items():
-            line = QHBoxLayout()
-
-            case_name = QLabel(case)
-            case_name.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(case_name)
-            time_start = QLabel(str(time[0]))
-            time_start.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(time_start)
-            time_end = QLabel(str(time[1]))
-            time_end.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(time_end)
-            del_button = QPushButton()
-            del_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(del_button)
-            del_button.clicked.connect(lambda: delete_items_of_layout(line))
-
-            parent.addLayout(line)
-        
-        line = QHBoxLayout()
-        add_once_button = QPushButton()
-        add_once_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        line.addWidget(add_once_button)
-        add_once_button.clicked.connect(lambda: self.add_case(parent, True))
-
-        add_button = QPushButton()
-        add_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        line.addWidget(add_button)
-        add_button.clicked.connect(lambda: self.add_case(parent, False))
-
-        parent.addLayout(line)
+        parent.addLayout(last_line)
 
 
     def add_task(self, parent, once):

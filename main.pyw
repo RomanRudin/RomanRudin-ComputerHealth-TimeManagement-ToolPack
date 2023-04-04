@@ -9,8 +9,9 @@ from DialogWindow import DialogWindow
 import threading
 from json import load
 
-time_counter = {}
-bars_in_count = []
+
+log = Log('log')    #logger
+
 #norm autorecalculating function
 def norm_getting():
     if CONSUMPTION_RECALCULATOR and MANAGEMENT:
@@ -23,11 +24,6 @@ def norm_getting():
                 time_counter[bar] = (NORM_SCHEDULE[str(date.today().weekday())][bar] + NORM_SETTINGS[bar]['stop-time'] - consumption_list[bar]) * 60
                 bars_in_count.append(bar)
 
-
-
-timer = 60          #duration between two tracking sessions
-norm_counter = 5    #duration (in 'timers' units of measure) between two recalculating sessions
-log = Log('log')    #logger
 
 def start_programm():
     if MANAGEMENT:
@@ -51,6 +47,7 @@ def start_programm():
         if counter % norm_counter == 0:
             norm_getting()
         counter += 1
+
 
 def main():
     #Multiple thins (such as mangement, health nd etc.) need to be done at the sme trcking itertion, 'cause I don't want programm to take multiple threads 
@@ -102,8 +99,13 @@ def main():
 
     if LEARNING:
         pass
-    
+
 
 if __name__ == "__main__":
     if MANAGEMENT or HEALTH or SCHEDULE or LEARNING:
+        time_counter = {}
+        bars_in_count = []
+
+        timer = 60          #duration between two tracking sessions
+        norm_counter = 5    #duration (in 'timers' units of measure) between two recalculating sessions
         start_programm()
