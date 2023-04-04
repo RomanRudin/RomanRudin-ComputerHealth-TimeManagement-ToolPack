@@ -1,6 +1,6 @@
-Social Network 	 5220 	 Discord 	 7840 
-Browser 	 5220 	 msedge 	 5732 
-Code 	 5220 	 Code 	 10504 
-Entartainment 	 5160 	 steam 	 2900 
-Tool 	 5160 	 DeepL 	 13640 
-Code 	 180 	 git 	 9280 
+Social Network 	 10140 	 Discord 	 7840 
+Browser 	 10140 	 msedge 	 5732 
+Code 	 10140 	 Code 	 10504 
+Entartainment 	 10080 	 steam 	 2900 
+Tool 	 10080 	 DeepL 	 13640 
+Code 	 300 	 git 	 9280 

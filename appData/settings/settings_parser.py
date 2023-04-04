@@ -1,3 +1,4 @@
+from asyncio import all_tasks
 from json import load
 
 '''
@@ -30,9 +31,23 @@ Task list for an everyday usage. Probably with the timer or any other time contr
 #TODO Not even started yet
 if SCHEDULE:
     with open('appData/settings/schedule/schedule_settings.txt') as file:
-        SCHEDULE_SETTINGS = file.read().splitlines()
-    with open('appData/settings/schedule/schedule.json') as file:
-        TIMETABLE = load(file)
+        data = file.read().splitlines()
+        SCHEDULE_SETTINGS = 0
+        TIMETABLE_SETTINGS = {"is_on": equality_parser(data[0], True),\
+            "messaging": False if not equality_parser(data[0], True) else equality_parser(data[1], True)}
+        TASK_LIST_SETTINGS = {"is_on": equality_parser(data[2], True),\
+            "messaging": False if not equality_parser(data[2], True) else equality_parser(data[3], True)}
+    if TIMETABLE_SETTINGS['is_on']:
+        with open('appData/settings/schedule/schedule.json') as file:
+            TIMETABLE = load(file)
+    if TASK_LIST_SETTINGS['is_on']:
+        with open('appData/settings/schedule/task_log.json') as file:
+            TASK_LIST_SAVED = load(file)
+        with open('appData/settings/schedule/all_tasks.txt') as file:
+            ALL_TASKS = file.read().strip().splitlines()
+        with open('appData/settings/schedule/eceryday_routine.json') as file:
+            TASK_LIST = load(file)
+        
 
 '''
 Main and the special part of programm. Probably can be used to track all the computer processes 
