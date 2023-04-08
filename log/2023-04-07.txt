@@ -1,0 +1,12 @@
+Browser 	 24120 	 msedge
+Code 	 24120 	 Code
+Social Network 	 24120 	 Discord
+Entartainment 	 24060 	 steam
+Learning 	 24060 	 EXCEL
+Tool 	 15600 	 DeepL
+Code 	 9000 	 mmc
+Tool 	 7020 	 obs64
+Game 	 5580 	 csgo
+Learning 	 3900 	 Zoom
+Entartainment 	 3720 	 Adobe Premiere Pro
+Code 	 60 	 git

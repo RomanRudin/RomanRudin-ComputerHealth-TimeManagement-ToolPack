@@ -1,11 +1,11 @@
-Social Network 	 39630 	 Discord 	 8384 
-Browser 	 39630 	 msedge 	 9796 
-Code 	 37890 	 Code 	 12308 
-Entartainment 	 29490 	 steam 	 8428 
-Entartainment 	 17760 	 Adobe Premiere Pro 	 7160 
-Tool 	 16110 	 obs64 	 9544 
-Entartainment 	 5580 	 MovieMaker 	 6788 
-Game 	 5040 	 csgo 	 13316 
-Tool 	 1590 	 DeepL 	 12268 
-Code 	 60 	 mmc 	 11624 
-Tool 	 30 	 wmplayer 	 8204 
+Social Network 	 39630 	 Discord 	
+Browser 	 39630 	 msedge 	
+Code 	 37890 	 Code 	
+Entartainment 	 29490 	 steam 	
+Entartainment 	 17760 	 Adobe Premiere Pro 	
+Tool 	 16110 	 obs64 	
+Entartainment 	 5580 	 MovieMaker 	
+Game 	 5040 	 csgo 	
+Tool 	 1590 	 DeepL 	
+Code 	 60 	 mmc 	
+Tool 	 30 	 wmplayer 	

@@ -1,0 +1,8 @@
+Browser 	 60 	 msedge
+Code 	 60 	 Code
+Social Network 	 60 	 Discord
+Entartainment 	 0 	 steam
+Learning 	 0 	 EXCEL
+Tool 	 0 	 DeepL
+Entartainment 	 0 	 Adobe Premiere Pro
+Tool 	 0 	 obs64

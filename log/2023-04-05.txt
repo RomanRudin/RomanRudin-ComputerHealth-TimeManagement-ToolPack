@@ -1,6 +1,11 @@
-Social Network 	 1740 	 Discord 	 10848 
-Browser 	 1740 	 msedge 	 9228 
-Code 	 1740 	 Code 	 12024 
-Entartainment 	 1680 	 steam 	 12812 
-Code 	 120 	 git 	 6468 
-Tool 	 60 	 DeepL 	 8748 
+Social Network 	 20580 	 Discord
+Browser 	 20580 	 msedge
+Entartainment 	 20520 	 steam
+Tool 	 17760 	 DeepL
+Code 	 10320 	 Code
+Learning 	 3660 	 Zoom
+Tool 	 3600 	 obs64
+Game 	 3540 	 csgo
+Code 	 240 	 git
+Game 	 180 	 noita
+Code 	 0 	 git-remote-https

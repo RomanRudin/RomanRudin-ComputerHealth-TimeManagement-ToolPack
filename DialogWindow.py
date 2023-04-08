@@ -1,10 +1,12 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QComboBox, QVBoxLayout, QSizePolicy, QLabel
+from PyQt5.QtCore import Qt
 from appData.constants.constants import PROCESS_TYPES
 from json import dump
 
 class DialogWindow(QWidget):
     def __init__(self, process, log, types) -> None:
         super().__init__()
+        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
         self.process = process
         self.log = log
         self.types = types

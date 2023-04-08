@@ -46,7 +46,7 @@ def norm_recalculating() -> dict:
                     other variables) and, if type_ is the same with bar - we take time to sum().
                     '''
                     full_consumption_list[bar][str(day)] = 0 - sum(int(time.strip()) / 60 \
-                       for type_, time, _process, _id in (line.strip().split('\t') \
+                       for type_, time, _process in (line.strip().split('\t') \
                        for line in reader) if type_.strip() == bar)\
                        + NORM_SCHEDULE[weekday][bar]
 
@@ -94,10 +94,12 @@ def norm_recalculating() -> dict:
     
     #changing overhauled logs because of new data
     with open('log/dataLogs/norm_overhaul_logs.json', 'w', encoding='utf-8') as file:
+        changed_norm = norm.copy()
         for day in norm.keys():
             a, b, c = map(int, day.split('-'))
             if (date.today() - date(a, b, c)).days > 14:
-                norm.pop(day)
+                changed_norm.pop(day)
+        norm = changed_norm.copy()
         norm[str(date.today())] = {}
         for bar in ALL_BARS:
             norm[str(date.today())][bar] = consumption_list[bar]['sum']

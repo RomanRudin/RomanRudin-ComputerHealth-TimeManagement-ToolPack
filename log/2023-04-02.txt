@@ -1,11 +1,11 @@
-Social Network 	 39480 	 Discord 	 8984 
-Browser 	 39480 	 msedge 	 9060 
-Entartainment 	 39420 	 steam 	 9036 
-Code 	 39360 	 Code 	 4172 
-Tool 	 33780 	 DeepL 	 15180 
-Entartainment 	 26760 	 Adobe Premiere Pro 	 6076 
-Learning 	 24120 	 chrome 	 15792 
-Tool 	 21840 	 obs64 	 2644 
-Game 	 2640 	 csgo 	 1508 
-Tool 	 0 	 wmplayer 	 14416 
-Code 	 0 	 git 	 17196 
+Social Network 	 39480 	 Discord
+Browser 	 39480 	 msedge
+Entartainment 	 39420 	 steam
+Code 	 39360 	 Code
+Tool 	 33780 	 DeepL
+Entartainment 	 26760 	 Adobe Premiere Pro
+Learning 	 24120 	 chrome
+Tool 	 21840 	 obs64
+Game 	 2640 	 csgo
+Tool 	 0 	 wmplayer
+Code 	 0 	 git
