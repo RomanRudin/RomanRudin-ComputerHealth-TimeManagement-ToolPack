@@ -1,6 +1,6 @@
 from sqlite3 import connect
 from PyQt5.QtWidgets import QWidget, QPushButton, QComboBox, QVBoxLayout, QSizePolicy, QLabel
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 from time import sleep
 
 class Health(QWidget):
@@ -22,11 +22,11 @@ class Health_popup_special(QWidget):
         button = QPushButton('ok')
         main_layout.addWidget(button, stretch=1)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        button.clicked.connect(self.__close)
+        button.clicked.connect(self.closing)
 
         self.setLayout(main_layout)
 
-    def __close(self):
+    def closing(self):
         self.close()
 
 
@@ -34,7 +34,7 @@ class Health_popup_special(QWidget):
 class Health_popup_standart(QWidget):
     def __init__(self, name):
         super().__init__()
-        self.stay_time = 5
+        self.stay_time = 3
         self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
         main_layout = QVBoxLayout()
 
@@ -42,10 +42,15 @@ class Health_popup_standart(QWidget):
         main_layout.addWidget(label)
         label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
+        timer = QTimer(self)
+        timer.setInterval(1000)
+        timer.timeout.connect(self.closing)
+        timer.start()
+
         self.setLayout(main_layout)
-        self.__close()
 
 
-    def __close(self):
-        sleep(self.stay_time)
-        self.close()
+    def closing(self):
+        if self.stay_time <= 0:
+            self.close()
+        self.stay_time -= 1

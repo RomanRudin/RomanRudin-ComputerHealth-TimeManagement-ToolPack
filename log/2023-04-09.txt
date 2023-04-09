@@ -1,9 +1,9 @@
-Browser 	 20160 	 msedge
-Social Network 	 20160 	 Discord
-Entartainment 	 20100 	 steam
-Tool 	 20100 	 DeepL
-Code 	 13080 	 Code
+Browser 	 22260 	 msedge
+Social Network 	 22260 	 Discord
+Entartainment 	 22200 	 steam
+Tool 	 22200 	 DeepL
+Code 	 15180 	 Code
 Learning 	 4320 	 EXCEL
-Entartainment 	 660 	 Adobe Premiere Pro
+Entartainment 	 2760 	 Adobe Premiere Pro
 Code 	 120 	 git
 Learning 	 60 	 chrome
