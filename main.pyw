@@ -47,8 +47,8 @@ def start_programm():
     counter = 0
     #every iteration takes one thread and gets data of processes and etc.
     while (True):
-        #thread = threading.Thread(target= main)
-        #thread.start()
+        thread = threading.Thread(target= main)
+        thread.start()
         main()
         sleep(timer)
         if counter % management_norm_counter == 0:
@@ -100,9 +100,7 @@ def  management_thread():
 
 def health_thread():
     for exersize, exersize_data in health_time_counter.items():
-        print('2')
         exersize_data['timer_counter'] -= 1
-        print(exersize, exersize_data)
         if exersize_data['timer_counter'] <= 0:
             app = QApplication(argv)
             if exersize_data['type'] == 'Standart':
@@ -138,7 +136,6 @@ def main():
     if SCHEDULE:
         schedule_thread()
     if HEALTH:
-        print('1')
         health_thread()
     if LEARNING:
         learning_thread

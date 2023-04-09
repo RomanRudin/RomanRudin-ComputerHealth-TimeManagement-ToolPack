@@ -1,9 +1,10 @@
-Browser 	 22260 	 msedge
-Social Network 	 22260 	 Discord
-Entartainment 	 22200 	 steam
-Tool 	 22200 	 DeepL
-Code 	 15180 	 Code
+Browser 	 30600 	 msedge
+Social Network 	 30600 	 Discord
+Entartainment 	 30540 	 steam
+Tool 	 30540 	 DeepL
+Code 	 23520 	 Code
+Entartainment 	 11100 	 Adobe Premiere Pro
+Learning 	 5220 	 chrome
 Learning 	 4320 	 EXCEL
-Entartainment 	 2760 	 Adobe Premiere Pro
 Code 	 120 	 git
-Learning 	 60 	 chrome
+Code 	 0 	 pyinstaller
