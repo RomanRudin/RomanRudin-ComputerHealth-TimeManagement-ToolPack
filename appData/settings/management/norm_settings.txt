@@ -5,3 +5,4 @@ Learning =          Reversed,   Unstopable, 60,     4
 Browser =           Straight,   Untopable,  60,     4
 Social Network =    Straight,   Stopable,   60,     4
 Tool =              Straight,   Unstopable, 60,     4
+Work =              Straight,   Unstopable, 60,     4

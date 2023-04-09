@@ -5,3 +5,4 @@ Learning = True
 Browser = False
 Social Network = False
 Tool = False
+Work = False

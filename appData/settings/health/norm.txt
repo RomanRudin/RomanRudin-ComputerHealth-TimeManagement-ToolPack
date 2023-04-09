@@ -1,3 +1,3 @@
-Warm-up =   Special,    True,   60
-Back =      Standart,   True,   15
-Eyes =      Standart,   True,   35
+Warm-up =   True,   Standart,   60
+Back =      True,   Standart,   15
+Eyes =      True,   Standart,   35

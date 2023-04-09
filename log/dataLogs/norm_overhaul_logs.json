@@ -1,13 +1,4 @@
 {
-    "2023-03-25": {
-        "Game": 0,
-        "Entartainment": 0,
-        "Code": 0,
-        "Learning": 0,
-        "Browser": 0,
-        "Social Network": 0,
-        "Tool": 0
-    },
     "2023-03-26": {
         "Game": 0,
         "Entartainment": 0,
@@ -15,7 +6,8 @@
         "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "2023-03-27": {
         "Game": 0,
@@ -24,7 +16,8 @@
         "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "2023-03-28": {
         "Game": 0,
@@ -33,7 +26,8 @@
         "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "2023-03-29": {
         "Game": 0,
@@ -42,7 +36,8 @@
         "Learning": 0,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "2023-03-30": {
         "Game": -225,
@@ -51,7 +46,8 @@
         "Learning": 4,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "2023-03-31": {
         "Game": -101,
@@ -60,7 +56,8 @@
         "Learning": 67,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "2023-04-01": {
         "Game": -55,
@@ -69,7 +66,8 @@
         "Learning": 163,
         "Browser": 1108,
         "Social Network": 1073,
-        "Tool": 824
+        "Tool": 824,
+        "Work": 0
     },
     "2023-04-02": {
         "Game": -135,
@@ -78,7 +76,8 @@
         "Learning": 68,
         "Browser": 2158,
         "Social Network": 2095,
-        "Tool": 1448
+        "Tool": 1448,
+        "Work": 0
     },
     "2023-04-03": {
         "Game": -138,
@@ -87,7 +86,8 @@
         "Learning": 231,
         "Browser": 3769,
         "Social Network": 3642,
-        "Tool": 2815
+        "Tool": 2815,
+        "Work": 0
     },
     "2023-04-04": {
         "Game": -227,
@@ -96,7 +96,8 @@
         "Learning": 158,
         "Browser": 6025,
         "Social Network": 5829,
-        "Tool": 4669
+        "Tool": 4669,
+        "Work": 0
     },
     "2023-04-05": {
         "Game": -271,
@@ -105,7 +106,8 @@
         "Learning": 81,
         "Browser": 9587,
         "Social Network": 9286,
-        "Tool": 7564
+        "Tool": 7564,
+        "Work": 0
     },
     "2023-04-08": {
         "Game": -494,
@@ -114,6 +116,17 @@
         "Learning": 80,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
+    },
+    "2023-04-09": {
+        "Game": -420,
+        "Entartainment": 0,
+        "Code": 240,
+        "Learning": 198,
+        "Browser": 0,
+        "Social Network": 0,
+        "Tool": 0,
+        "Work": 0
     }
 }

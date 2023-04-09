@@ -6,7 +6,8 @@
         "Learning": 20,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "1": {
         "Game": 120,
@@ -15,7 +16,8 @@
         "Learning": 80,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "2": {
         "Game": 60,
@@ -24,7 +26,8 @@
         "Learning": 20,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "3": {
         "Game": 600,
@@ -33,7 +36,8 @@
         "Learning": 80,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "4": {
         "Game": 60,
@@ -42,7 +46,8 @@
         "Learning": 20,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "5": {
         "Game": 300,
@@ -51,7 +56,8 @@
         "Learning": 20,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     },
     "6": {
         "Game": 150,
@@ -60,6 +66,7 @@
         "Learning": 120,
         "Browser": 0,
         "Social Network": 0,
-        "Tool": 0
+        "Tool": 0,
+        "Work": 0
     }
 }

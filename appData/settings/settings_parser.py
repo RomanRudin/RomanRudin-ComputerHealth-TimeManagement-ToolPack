@@ -89,11 +89,11 @@ Small messaging part that will remind user to do eye gimnastics or whatever.
 if HEALTH:
     with open('appData/settings/health/norm.txt', encoding='utf-8') as file:
         data = file.read().splitlines()
-        HEALTH_SETTINHS = {'Special': {}, 'Standart': {}}
+        HEALTH_SETTINHS = {}
         for line in data:
             settings = equality_parser(line).split(',')
-            if boolean_reader(settings[1].strip()):
-                HEALTH_SETTINHS[settings[0].strip()][line[:line.find(' = ')]] = 0
+            if boolean_reader(settings[0].strip()):
+                HEALTH_SETTINHS[line[:line.find(' = ')]] = [settings[1].strip(), int(settings[2].strip())]
 
 '''
 In case I have 1,5 months left 'till ЕГЭ - russian main students exam. I'm stupid, yeah...

@@ -1,7 +1,7 @@
 consumption recalculation = True
 
-days of overconsumption = 6
-formula for overconsumption = main * (7 - day) / 10
+days of overconsumption = 5
+formula for overconsumption = main * (6 - day) / 10
 
 days of underconsumption = 3
 formula for underconsumption = main * (day - 4) / 10
