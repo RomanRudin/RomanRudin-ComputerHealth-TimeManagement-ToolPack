@@ -1,14 +1,4 @@
 {
-    "2023-03-26": {
-        "Game": 0,
-        "Entartainment": 0,
-        "Code": 0,
-        "Learning": 0,
-        "Browser": 0,
-        "Social Network": 0,
-        "Tool": 0,
-        "Work": 0
-    },
     "2023-03-27": {
         "Game": 0,
         "Entartainment": 0,
@@ -124,6 +114,16 @@
         "Entartainment": 0,
         "Code": 240,
         "Learning": 198,
+        "Browser": 0,
+        "Social Network": 0,
+        "Tool": 0,
+        "Work": 0
+    },
+    "2023-04-10": {
+        "Game": -425,
+        "Entartainment": 0,
+        "Code": 240,
+        "Learning": 80,
         "Browser": 0,
         "Social Network": 0,
         "Tool": 0,

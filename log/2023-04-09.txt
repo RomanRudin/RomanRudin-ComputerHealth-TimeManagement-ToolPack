@@ -1,10 +1,15 @@
-Browser 	 30600 	 msedge
-Social Network 	 30600 	 Discord
-Entartainment 	 30540 	 steam
-Tool 	 30540 	 DeepL
-Code 	 23520 	 Code
-Entartainment 	 11100 	 Adobe Premiere Pro
-Learning 	 5220 	 chrome
+Browser 	 47580 	 msedge
+Entartainment 	 47520 	 steam
+Tool 	 47520 	 DeepL
+Social Network 	 47460 	 Discord
+Code 	 40500 	 Code
+Entartainment 	 28080 	 Adobe Premiere Pro
+Learning 	 5940 	 chrome
+Tool 	 5940 	 obs64
 Learning 	 4320 	 EXCEL
-Code 	 120 	 git
-Code 	 0 	 pyinstaller
+Game 	 4020 	 csgo
+Code 	 240 	 git
+Code 	 120 	 pyinstaller
+Game 	 60 	 QtWebEngineProcess
+Game 	 0 	 evelauncher
+Game 	 0 	 crashpad_handler

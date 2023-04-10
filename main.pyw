@@ -25,6 +25,8 @@ def norm_getting():
             if NORM_SETTINGS[bar]['is_stopable'] and bar in BARS:
                 time_counter[bar] = (NORM_SCHEDULE[str(date.today().weekday())][bar] + NORM_SETTINGS[bar]['stop_time'] - consumption_list[bar]) * 60
                 bars_in_count.append(bar)
+
+def data_loader():
     if HEALTH:
         for exersize, exersize_data in HEALTH_SETTINHS.items():
             health_time_counter[exersize] = {'timer_counter': exersize_data[1] * 60 // timer, \
@@ -42,6 +44,7 @@ def start_programm():
             types = load(file)                          #types of every known for programm process
     if SCHEDULE:
         pass    #TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    data_loader()
     main()
     norm_getting()
     counter = 0
@@ -49,7 +52,6 @@ def start_programm():
     while (True):
         thread = threading.Thread(target= main)
         thread.start()
-        main()
         sleep(timer)
         if counter % management_norm_counter == 0:
             norm_getting()
@@ -62,7 +64,7 @@ def  management_thread():
     task_list = set()   #my own interpretaton of checking on already tracked programm processes (because one programm can have multiple of them with different ids)
     for line in tasks:        
         line = line.replace('"', '').split(',')
-        if len(line) > 1 and not stopped: 
+        if len(line) > 1: 
             process = line[0][:-4]
             if line[3] != '0' and not process in NonTrack and not process in killMeProcesses: 
                 if not process in log.logs: #if process hadn't been tracked today
@@ -99,8 +101,10 @@ def  management_thread():
 
 
 def health_thread():
+    global stopped
     for exersize, exersize_data in health_time_counter.items():
         exersize_data['timer_counter'] -= 1
+        print(exersize, exersize_data['timer_counter'])
         if exersize_data['timer_counter'] <= 0:
             app = QApplication(argv)
             if exersize_data['type'] == 'Standart':
@@ -109,13 +113,17 @@ def health_thread():
                 popup.show()
                 app.exec_()
             else:
+                stopped = True
                 popup = Health_popup_special(exersize)
                 popup.resize(400, 300)
                 popup.show()
                 app.exec_()
+                stopped = False
             del popup
             del app
             exersize_data['timer_counter'] = HEALTH_SETTINHS[exersize][1]
+    print()
+    print()
 
 
 
@@ -130,15 +138,16 @@ def learning_thread():
 
 
 def main():
-    #Multiple thins (such as mangement, health nd etc.) need to be done at the sme trcking itertion, 'cause I don't want programm to take multiple threads 
-    if MANAGEMENT:
-        management_thread()
-    if SCHEDULE:
-        schedule_thread()
-    if HEALTH:
-        health_thread()
-    if LEARNING:
-        learning_thread
+    if not stopped:
+        #Multiple tools (such as mangement, health nd etc.) need to be done at the sme trcking itertion, 'cause I don't want programm to take multiple threads 
+        if MANAGEMENT:
+            management_thread()
+        if SCHEDULE:
+            schedule_thread()
+        if HEALTH:
+            health_thread()
+        if LEARNING:
+            learning_thread
 
 
 if __name__ == "__main__":
