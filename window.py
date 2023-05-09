@@ -6,7 +6,7 @@ from apps.time_managment import Management
 from apps.settings_window import Settings
 from apps.module import *
 from appData.constants.constants import WEEKDAY_LIST
-from appData.settings.settings_parser import SCHEDULE, HEALTH, MANAGEMENT, LEARNING
+from appData.settings.settings_parser import SCHEDULE, HEALTH, MANAGEMENT, stylesheet_main
 from sys import argv, exit
 from apps.pyqt_module import delete_items_of_layout
 
@@ -15,6 +15,7 @@ class Window(QWidget):
         super().__init__()
         self.main_layout = QVBoxLayout()
         self.button_layout = QHBoxLayout()
+        self.content_layout = QHBoxLayout()
 
         #button
         if SCHEDULE:
@@ -32,17 +33,15 @@ class Window(QWidget):
             self.button_layout.addWidget(self.health, stretch=3)
             self.health.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             self.health.clicked.connect(self.show_health)
-        if LEARNING:
-            self.learning = QPushButton('Learning')
-            self.button_layout.addWidget(self.learning, stretch=3)
-            self.learning.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            self.learning.clicked.connect(self.show_learning)
         self.settings = QPushButton('settings')
         self.button_layout.addWidget(self.settings, stretch=1)
         self.settings.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.settings.clicked.connect(self.show_settings)
 
         self.main_layout.addLayout(self.button_layout)
+
+
+        self.main_layout.addLayout(self.content_layout)
 
         self.date = QLabel(WEEKDAY_LIST[datetime.today().weekday() - 1])
         self.main_layout.addWidget(self.health)
@@ -54,7 +53,8 @@ class Window(QWidget):
 
 
     def refresh(self):
-        self.main_layout.addWidget(self.content)
+        delete_items_of_layout(self.content_layout)
+        self.content_layout.addWidget(self.content)
         self.content.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.content.show()
 
@@ -70,10 +70,6 @@ class Window(QWidget):
         self.content = Health()
         self.refresh()
 
-    def show_learning(self):
-        self.content = Health()
-        self.refresh()
-
     def show_settings(self):
         self.content = Settings()
         self.refresh()
@@ -81,6 +77,7 @@ class Window(QWidget):
 if __name__ == "__main__":
     try:
         app = QApplication([argv]) 
+        app.setStyleSheet(stylesheet_main)
         main = Window()
         main.resize(1200, 800)
         main.show()        

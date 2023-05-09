@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-from appData.settings.settings_parser import BARS, ALL_BARS, OVERCONSUMPTION_FORMULA, \
+from appData.settings.settings_parser import ALL_BARS, OVERCONSUMPTION_FORMULA, \
     UNDERCONSUMPTION_FORMULA, NORM_SCHEDULE, DAYS_OVERCONSUMPTION, DAYS_UNDERCONSUMPTION, \
     NORM_SETTINGS
 from json import load, dump
@@ -89,8 +89,8 @@ def norm_recalculating() -> dict:
             #counting summary of all the recalculated transitions of one bar
             consumption_list[bar]['sum'] = sum(int(value) for value in consumption_list[bar].values())
             #if recalculated norm is higher than the maximum possibly nirm for user
-            if consumption_list[bar]['sum'] > (NORM_SCHEDULE[str(date.today().weekday())][bar] * NORM_SETTINGS[bar]['max_increasment']):
-                consumption_list[bar]['sum'] = (NORM_SCHEDULE[str(date.today().weekday())][bar] * NORM_SETTINGS[bar]['max_increasment'])
+            if consumption_list[bar]['sum'] > (NORM_SETTINGS[bar]['max_increasment'] * 3600):
+                consumption_list[bar]['sum'] = NORM_SETTINGS[bar]['max_increasment'] * 3600
     
     #changing overhauled logs because of new data
     with open('log/dataLogs/norm_overhaul_logs.json', 'w', encoding='utf-8') as file:

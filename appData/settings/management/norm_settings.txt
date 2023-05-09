@@ -1,8 +1,8 @@
-Game =              Straight,   Stopable,   60,     3
-Entartainment =     Straight,   Stopable,   60,     4
-Code =              Reversed,   Unstopable, 60,     4
-Learning =          Reversed,   Unstopable, 60,     4
-Browser =           Straight,   Untopable,  60,     4
-Social Network =    Straight,   Stopable,   60,     4
-Tool =              Straight,   Unstopable, 60,     4
-Work =              Straight,   Unstopable, 60,     4
+Game =              Straight,   Unstopable,   60,     8
+Entartainment =     Straight,   Stopable,   60,     24
+Code =              Reversed,   Unstopable, 60,     8
+Learning =          Reversed,   Unstopable, 60,     6
+Browser =           Straight,   Untopable,  60,     24
+Social Network =    Straight,   Stopable,   60,     24
+Tool =              Straight,   Unstopable, 60,     24
+Work =              Straight,   Unstopable, 60,     8

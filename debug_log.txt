@@ -1,1 +1,1 @@
-'Window' object has no attribute 'health'
+'QWidget' object has no attribute 'count'

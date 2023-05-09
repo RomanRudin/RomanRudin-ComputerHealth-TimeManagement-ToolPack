@@ -31,5 +31,11 @@
     "EXCEL": "Learning",
     "pyinstaller": "Code",
     "evelauncher": "Game",
-    "QtWebEngineProcess": "Code"
+    "QtWebEngineProcess": "Code",
+    "mspaint": "Tool",
+    "WinRAR": "Tool",
+    "Terraria": "Game",
+    "POWERPNT": "Tool",
+    "starwarsbattlefront": "Game",
+    "pip": "Code"
 }

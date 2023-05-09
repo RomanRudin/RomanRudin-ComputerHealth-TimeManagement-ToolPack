@@ -4,8 +4,8 @@ from datetime import date
 from PyQt5.QtWidgets import QApplication
 from apps.logger import *
 from apps.module import *
-from appData.settings.settings_parser import BARS, LEARNING, MANAGEMENT, CONSUMPTION_RECALCULATOR, HEALTH, SCHEDULE, \
-    HEALTH_SETTINHS
+from appData.settings.settings_parser import BARS, MANAGEMENT, CONSUMPTION_RECALCULATOR, HEALTH, SCHEDULE, \
+    HEALTH_SETTINHS, stylesheet_popup
 from apps.health import Health_popup_special, Health_popup_standart
 from DialogWindow import DialogWindow
 import threading
@@ -35,13 +35,15 @@ def data_loader():
 
 def start_programm():
     if MANAGEMENT:
-        global NonTrack, log, killMeProcesses, types
-        with open(f'appData/processes/NonTrack.conf', 'r', encoding='utf-8') as file:
+        global NonTrack, log, killMeProcesses, types, doNotDisturbProcesses
+        with open('appData/processes/NonTrack.conf', 'r', encoding='utf-8') as file:
             NonTrack = file.read().splitlines()         #untracked processes (such as system processes)
-        with open(f'appData/processes/killMeProcesses.conf', 'r', encoding='utf-8') as file:
+        with open('appData/processes/killMeProcesses.conf', 'r', encoding='utf-8') as file:
             killMeProcesses = file.read().splitlines()  #processes user don't want to deal with at all
-        with open(f'appData/processes/types.json', 'r', encoding='utf-8') as file:
+        with open('appData/processes/types.json', 'r', encoding='utf-8') as file:
             types = load(file)                          #types of every known for programm process
+        with open('appData/processes/DoNotDisturbProcesses.conf', 'r', encoding='utf-8') as file:
+            doNotDisturbProcesses = file.read().splitlines()
     if SCHEDULE:
         pass    #TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     data_loader()
@@ -59,7 +61,8 @@ def start_programm():
 
 
 def  management_thread():
-    global types, stopped
+    global types, stopped, doNotDisturbProcesses
+    doNotDisturb = False
     tasks = commandExecutionP('tasklist /FO CSV')
     task_list = set()   #my own interpretaton of checking on already tracked programm processes (because one programm can have multiple of them with different ids)
     for line in tasks:        
@@ -91,6 +94,8 @@ def  management_thread():
                     task_list.add(process)
                     if log.logs[process][0] in bars_in_count:
                         time_counter[log.logs[process][0]] -= timer #timer before possibility to close the process on programm's purpose (because user spent to much time on this category already)
+                if process in doNotDisturbProcesses:
+                    doNotDisturb = True
             elif process in killMeProcesses: 
                 commandExecution('taskkill /PID ' + line[1])
     for bar, time in time_counter.items():
@@ -98,32 +103,29 @@ def  management_thread():
             killMeProcesses.extend([process for process, data in log.logs.items() if data[0] == bar and process not in killMeProcesses])
             time_counter[bar] = 0
     log.write()
+    return doNotDisturb
 
 
-def health_thread():
+def health_thread(doNotDisturb):
     global stopped
     for exersize, exersize_data in health_time_counter.items():
         exersize_data['timer_counter'] -= 1
-        print(exersize, exersize_data['timer_counter'])
-        if exersize_data['timer_counter'] <= 0:
+        if exersize_data['timer_counter'] <= 0 and not doNotDisturb:
             app = QApplication(argv)
+            app.setStyleSheet(stylesheet_popup)
             if exersize_data['type'] == 'Standart':
                 popup = Health_popup_standart(exersize)
-                popup.resize(400, 300)
                 popup.show()
                 app.exec_()
             else:
                 stopped = True
                 popup = Health_popup_special(exersize)
-                popup.resize(400, 300)
                 popup.show()
                 app.exec_()
                 stopped = False
             del popup
             del app
             exersize_data['timer_counter'] = HEALTH_SETTINHS[exersize][1]
-    print()
-    print()
 
 
 
@@ -132,26 +134,20 @@ def schedule_thread():
     pass
 
 
-def learning_thread():
-    pass
-
-
 
 def main():
     if not stopped:
         #Multiple tools (such as mangement, health nd etc.) need to be done at the sme trcking itertion, 'cause I don't want programm to take multiple threads 
         if MANAGEMENT:
-            management_thread()
+            doNotDisturb = management_thread()
         if SCHEDULE:
             schedule_thread()
         if HEALTH:
-            health_thread()
-        if LEARNING:
-            learning_thread
+            health_thread(doNotDisturb)
 
 
 if __name__ == "__main__":
-    if MANAGEMENT or HEALTH or SCHEDULE or LEARNING:
+    if MANAGEMENT or HEALTH or SCHEDULE:
         time_counter = {}
         bars_in_count = []
         health_time_counter = {}

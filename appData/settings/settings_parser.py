@@ -1,4 +1,4 @@
-from asyncio import all_tasks
+from datetime import date
 from json import load
 
 '''
@@ -21,7 +21,13 @@ with open('appData/settings/config.txt', encoding='utf-8') as file:
     SCHEDULE = equality_parser(data[0], True)
     MANAGEMENT = equality_parser(data[1], True)
     HEALTH = equality_parser(data[2], True)
-    LEARNING = equality_parser(data[2], True)
+
+#Stylesheets reading
+with open('design/main.qss', encoding='utf-8') as file:
+    stylesheet_main = file.read()
+
+with open('design/popup.qss', encoding='utf-8') as file:
+    stylesheet_popup = file.read()
 
 
 '''
@@ -43,6 +49,9 @@ if SCHEDULE:
     if TASK_LIST_SETTINGS['is_on']:
         with open('appData/settings/schedule/everyday_routine.json') as file:
             TASK_LIST = load(file)
+    with open('appData/settings/schedule/goals.json') as file:
+        data = load(file)
+        GOALS = {goal: date(int(day.split('.')[2]), int(day.split('.')[1]),  int(day.split('.')[0])) for goal, day in data.items()}
         
 
 '''
@@ -94,13 +103,3 @@ if HEALTH:
             settings = equality_parser(line).split(',')
             if boolean_reader(settings[0].strip()):
                 HEALTH_SETTINHS[line[:line.find(' = ')]] = [settings[1].strip(), int(settings[2].strip())]
-
-'''
-In case I have 1,5 months left 'till ЕГЭ - russian main students exam. I'm stupid, yeah...
-Reminder (in future (in my dreams) after adding web-scrapping possibility - small student book)
-to make some random exersizes depending on today's norm and those exersizes difficulty and user 
-preferences, set by user in special settings.
-'''
-#TODO JUST MAKE IT ALREADY U BASTARD!
-if LEARNING: 
-    pass

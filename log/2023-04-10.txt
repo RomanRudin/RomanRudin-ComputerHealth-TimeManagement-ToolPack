@@ -1,6 +1,11 @@
-Browser 	 32580 	 msedge
-Social Network 	 32580 	 Discord
-Entartainment 	 32520 	 steam
-Tool 	 32520 	 DeepL
-Code 	 31980 	 Code
-Entartainment 	 18960 	 Adobe Premiere Pro
+Browser 	 52620 	 msedge
+Social Network 	 52620 	 Discord
+Entartainment 	 52560 	 steam
+Tool 	 52560 	 DeepL
+Code 	 52020 	 Code
+Entartainment 	 35820 	 Adobe Premiere Pro
+Tool 	 8280 	 mspaint
+Learning 	 7680 	 chrome
+Tool 	 4680 	 obs64
+Game 	 4020 	 csgo
+Code 	 0 	 pyinstaller

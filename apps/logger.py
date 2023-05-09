@@ -15,7 +15,7 @@ class Log():
         }
         '''
 
-    def write(self):
+    def write(self) -> None:
         self.new_session = False
         if not path.exists(self.dir):
             makedirs(self.dir)
@@ -25,11 +25,10 @@ class Log():
             for process, data in self.logs.items():
                 text += f'{str(data[0])} \t {str(data[1])} \t {str(process)}\n' 
             file.write(text)
-            print(text)
 
 
 
-    def __read(self):
+    def __read(self) -> dict:
         if path.exists(self.path):
             with open(self.path, 'r', encoding='utf-8') as file:
                 return {process.strip(): [type_.strip(), int(time.strip())] \

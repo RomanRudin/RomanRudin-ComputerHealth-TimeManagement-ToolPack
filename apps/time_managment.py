@@ -1,6 +1,5 @@
 from datetime import date
 from PyQt5.QtWidgets import QWidget, QListWidget, QVBoxLayout, QHBoxLayout, QSizePolicy
-from matplotlib import colors
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 from appData.constants.constants import BAR1_COLORS, BAR2_COLORS
@@ -28,6 +27,10 @@ class Management(QWidget):
         self.statistic_of_programms = plt.figure()
         self.statistic_of_programms_canvas = FigureCanvasQTAgg(self.statistic_of_programms)
         main_layout.addWidget(self.statistic_of_programms_canvas, stretch=3)
+
+        self.last_two_weeks = plt.figure()
+        self.last_two_weeks_canvas = FigureCanvasQTAgg(self.last_two_weeks)
+        main_layout.addWidget(self.last_two_weeks_canvas, stretch=3)
 
         #choosing random colors for bars
         self.color_data = {
@@ -61,9 +64,11 @@ class Management(QWidget):
     def plot(self):
         self.statistic_in_spheres.clear()
         self.statistic_of_programms.clear()
+        self.last_two_weeks.clear()
 
         ax1 = self.statistic_in_spheres.add_subplot(111)
         ax2 = self.statistic_of_programms.add_subplot(111)
+        ax3 = self.last_two_weeks.add_subplot(111)
 
 
         time_in_sphere = {bar: sum(data[1] / 3600 for data in log.logs.values() if data[0] == bar) for bar in BARS}
@@ -72,8 +77,7 @@ class Management(QWidget):
         ax1.plot([NORM_SCHEDULE[str(date.today().weekday())][bar] / 60 for bar in list(time_in_sphere.keys())], list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='red')
         #TODO make a plot-marker for changeable markers. Firstly I'll need to make a function, that will count those markers
         if CONSUMPTION_RECALCULATOR:
-            recalculated_norm_list = [(NORM_SCHEDULE[str(date.today().weekday())][bar] - self.recalculated_norm[bar]['sum']) if NORM_SETTINGS[bar]['bar_type'] \
-                else (NORM_SCHEDULE[str(date.today().weekday())][bar] + self.recalculated_norm[bar]['sum']) \
+            recalculated_norm_list = [(NORM_SCHEDULE[str(date.today().weekday())][bar] - self.recalculated_norm[bar]['sum']) \
                 for bar in list(time_in_sphere.keys())]
             recalculated_norm_list = [num / 60 if num > 0 else 0 for num in recalculated_norm_list]
             ax1.plot(recalculated_norm_list, list(time_in_sphere.keys()), marker='D', linestyle='none', alpha=0.8, color='green')
@@ -100,5 +104,10 @@ class Management(QWidget):
         ax2.set_title('')
         ax2.legend(title='Type of the programm')
 
+
+        #ax3 changing? Is it better to make Simple QLables with data instead of making plot?
+
+
         self.statistic_in_spheres_canvas.draw()
         self.statistic_of_programms_canvas.draw()
+        self.last_two_weeks_canvas.draw()

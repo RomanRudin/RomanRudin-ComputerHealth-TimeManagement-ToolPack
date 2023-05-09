@@ -1,8 +1,6 @@
-from asyncio import tasks
-from faulthandler import is_enabled
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLabel, QPushButton, QLineEdit
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLabel, QPushButton, QLineEdit, QListWidget
 from datetime import date
-from appData.settings.settings_parser import TASK_LIST, TIMETABLE_SETTINGS, TASK_LIST_SETTINGS
+from appData.settings.settings_parser import TIMETABLE_SETTINGS, TASK_LIST_SETTINGS, GOALS
 from apps.pyqt_module import delete_items_of_layout
 from json import dump, load
 
@@ -10,6 +8,14 @@ class Schedule(QWidget):
     def __init__(self):
         super().__init__()
         main_layout = QVBoxLayout()
+
+
+        self.goals = QListWidget()
+        self.goals.addItems(GOALS.keys())
+        self.goals.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        main_layout.addWidget(self.goals)
+
+
         today_layout = QHBoxLayout()
         main_layout.addLayout(today_layout)
         tomorrow_layout = QHBoxLayout()
@@ -92,7 +98,7 @@ class Schedule(QWidget):
 
             parent.addLayout(line)
         
-        last_line = QVBoxLayout()
+        last_line = QHBoxLayout()
         button_line = QHBoxLayout()
 
         add_once_button = QPushButton()
