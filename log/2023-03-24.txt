@@ -1,8 +1,0 @@
-Code 	 150 	 csgo 	 8916 
-Social Network 	 6 	 Discord 	 6928 
-Entartainment 	 6 	 steam 	 8932 
-Browser 	 6 	 msedge 	 3652 
-Tool 	 6 	 DeepL 	 8724 
-Learning 	 6 	 chrome 	 10696 
-Code 	 6 	 Code 	 12804 
-Code 	 0 	 git 	 7404 

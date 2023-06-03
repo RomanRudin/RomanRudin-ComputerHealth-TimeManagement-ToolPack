@@ -1,8 +1,0 @@
-Entartainment 	 1975 	 steam 	 8224 
-Tool 	 1975 	 DeepL 	 12204 
-Social Network 	 1390 	 Discord 	 10036 
-Browser 	 1390 	 msedge 	 8148 
-Code 	 1385 	 Code 	 4776 
-Learning 	 625 	 chrome 	 12716 
-Social Network 	 55 	 Telegram 	 9772 
-Code 	 0 	 git 	 12616 

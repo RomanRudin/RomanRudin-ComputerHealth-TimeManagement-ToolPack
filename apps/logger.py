@@ -1,5 +1,5 @@
 from datetime import date
-from os import makedirs, path
+from os import makedirs, path, remove, listdir
 
 #main logger, used by main time manager file to save and load data from log files
 class Log():
@@ -8,6 +8,7 @@ class Log():
         self.path = f'{dir}/{date.today()}.txt'
         self.types = f''
         self.logs = self.__read()
+        self.__remove_previous()
         self.new_session = True
         '''
         {
@@ -36,3 +37,11 @@ class Log():
                     for line in file.read().splitlines())}
 
         return {}
+
+    def __remove_previous(self) -> None:
+        logs = [file for file in listdir(self.dir)]
+        logs.pop(-1)
+        if len(logs) > 28:
+            for _ in range(len(logs) - 28):
+                remove(f'{self.dir}/{logs.pop(logs.index(logs[0]))}')
+

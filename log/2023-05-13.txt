@@ -1,0 +1,9 @@
+Social Network 	 17460 	 Discord
+Browser 	 17460 	 msedge
+Entartainment 	 17400 	 steam
+Tool 	 17400 	 DeepL
+Tool 	 11580 	 mspaint
+Code 	 10620 	 Code
+Game 	 5640 	 Terraria
+Game 	 5220 	 csgo
+Tool 	 0 	 WLXPhotoGallery

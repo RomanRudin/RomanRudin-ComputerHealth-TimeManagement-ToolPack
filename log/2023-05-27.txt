@@ -1,0 +1,10 @@
+Social Network 	 24060 	 Discord
+Browser 	 24060 	 msedge
+Code 	 24060 	 Koala
+Entartainment 	 24000 	 steam
+Tool 	 24000 	 DeepL
+Code 	 22620 	 Code
+Learning 	 7140 	 chrome
+Game 	 5400 	 csgo
+Game 	 1920 	 noita
+Tool 	 120 	 ruby

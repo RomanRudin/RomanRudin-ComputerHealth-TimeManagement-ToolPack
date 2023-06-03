@@ -1,0 +1,9 @@
+Social Network 	 42540 	 Discord
+Browser 	 42540 	 msedge
+Entartainment 	 42480 	 steam
+Tool 	 42480 	 DeepL
+Game 	 18060 	 Terraria
+Code 	 11400 	 Code
+Game 	 7320 	 csgo
+Code 	 180 	 git
+Learning 	 60 	 chrome

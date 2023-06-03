@@ -1,0 +1,17 @@
+Social Network 	 35220 	 Discord
+Browser 	 35220 	 msedge
+Entartainment 	 35160 	 steam
+Tool 	 35160 	 DeepL
+Code 	 30420 	 Code
+Code 	 25020 	 Koala
+Social Network 	 8280 	 Telegram
+Learning 	 4260 	 chrome
+Tool 	 2220 	 oCam
+Tool 	 780 	 mspaint
+Code 	 300 	 git
+Tool 	 180 	 ruby
+Code 	 60 	 sh
+Code 	 60 	 vim
+Tool 	 0 	 consent
+Code 	 0 	 pip
+Code 	 0 	 git-remote-https

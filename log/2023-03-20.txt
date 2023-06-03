@@ -1,6 +1,0 @@
-Social Network 	 160 	 Discord 	 8244 
-Browser 	 160 	 msedge 	 9108 
-Tool 	 160 	 DeepL 	 10784 
-Entartainment 	 160 	 steam 	 15276 
-Code 	 160 	 Code 	 10688 
-Tool 	 10 	 notepad 	 16928 

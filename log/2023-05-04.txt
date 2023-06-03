@@ -1,0 +1,9 @@
+Browser 	 25800 	 msedge
+Social Network 	 25740 	 Discord
+Entartainment 	 25740 	 steam
+Tool 	 25740 	 DeepL
+Game 	 18480 	 Terraria
+Code 	 11820 	 Code
+Learning 	 3240 	 chrome
+Code 	 3060 	 QtWebEngineProcess
+Tool 	 1380 	 obs64

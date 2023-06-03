@@ -1,0 +1,10 @@
+Social Network 	 27540 	 Discord
+Browser 	 27540 	 msedge
+Tool 	 27480 	 DeepL
+Entartainment 	 25260 	 steam
+Code 	 23880 	 Code
+Game 	 5400 	 csgo
+Learning 	 3780 	 Zoom
+Learning 	 2400 	 chrome
+Tool 	 1860 	 obs64
+Game 	 1620 	 Terraria

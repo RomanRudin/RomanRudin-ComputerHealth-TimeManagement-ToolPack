@@ -1,0 +1,7 @@
+Social Network 	 13800 	 Discord
+Browser 	 13800 	 msedge
+Entartainment 	 13740 	 steam
+Tool 	 13740 	 DeepL
+Code 	 13620 	 Code
+Tool 	 1740 	 notepad
+Learning 	 1140 	 chrome

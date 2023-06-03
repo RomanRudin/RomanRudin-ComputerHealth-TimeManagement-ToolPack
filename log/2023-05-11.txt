@@ -1,0 +1,9 @@
+Social Network 	 32280 	 Discord
+Browser 	 32280 	 msedge
+Entartainment 	 32220 	 steam
+Tool 	 32220 	 DeepL
+Tool 	 28800 	 WINWORD
+Game 	 11460 	 Terraria
+Social Network 	 4260 	 Telegram
+Learning 	 3060 	 chrome
+Code 	 180 	 Code

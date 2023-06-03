@@ -1,0 +1,8 @@
+Social Network 	 23940 	 Discord
+Code 	 23940 	 Code
+Browser 	 23940 	 msedge
+Code 	 23940 	 Koala
+Entartainment 	 23880 	 steam
+Tool 	 23880 	 DeepL
+Game 	 11580 	 csgo
+Tool 	 5760 	 obs64

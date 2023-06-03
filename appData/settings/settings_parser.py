@@ -1,26 +1,33 @@
 from datetime import date
 from json import load
+from typing import Final, TypedDict
 
 '''
 If you want to read False as False from file in Python, you gonna need to use this crunch, because only empty sting will return False if converted to bool
 '''
-def boolean_reader(text):
+def boolean_reader(text) -> bool:
     if text.lower().capitalize() == 'False':
         return False
     return True
 
-def equality_parser(text, boolean=False):
+def equality_parser(text, boolean=False) -> str or bool:
     value = text[text.find(' = ') + 3:]
     if boolean:
        return boolean_reader(value)
     return value
 
+#TODO Make data classes for TIMETABLE_SETTINGS and TASK_LIST_SETTINGS
+class Tasks_settings(TypedDict):
+    is_on: bool
+    messaging: bool
+
+
 #reading main config file, containing which sections of programms are going to work
 with open('appData/settings/config.txt', encoding='utf-8') as file:
     data = file.read().splitlines()
-    SCHEDULE = equality_parser(data[0], True)
-    MANAGEMENT = equality_parser(data[1], True)
-    HEALTH = equality_parser(data[2], True)
+    SCHEDULE: Final[bool] = equality_parser(data[0], True)
+    MANAGEMENT: Final[bool] = equality_parser(data[1], True)
+    HEALTH: Final[bool] = equality_parser(data[2], True)
 
 #Stylesheets reading
 with open('design/main.qss', encoding='utf-8') as file:
@@ -38,20 +45,20 @@ Task list for an everyday usage. Probably with the timer or any other time contr
 if SCHEDULE:
     with open('appData/settings/schedule/schedule_settings.txt') as file:
         data = file.read().splitlines()
-        SCHEDULE_SETTINGS = 0
+        SCHEDULE_SETTINGS: Final[dict] = 0 #??????????????????????????????????
         TIMETABLE_SETTINGS = {"is_on": equality_parser(data[0], True),\
             "messaging": False if not equality_parser(data[0], True) else equality_parser(data[1], True)}
         TASK_LIST_SETTINGS = {"is_on": equality_parser(data[2], True),\
             "messaging": False if not equality_parser(data[2], True) else equality_parser(data[3], True)}
     if TIMETABLE_SETTINGS['is_on']:
         with open('appData/settings/schedule/schedule.json') as file:
-            TIMETABLE = load(file)
+            TIMETABLE: Final[dict] = load(file)
     if TASK_LIST_SETTINGS['is_on']:
         with open('appData/settings/schedule/everyday_routine.json') as file:
-            TASK_LIST = load(file)
+            TASK_LIST: Final[dict] = load(file)
     with open('appData/settings/schedule/goals.json') as file:
         data = load(file)
-        GOALS = {goal: date(int(day.split('.')[2]), int(day.split('.')[1]),  int(day.split('.')[0])) for goal, day in data.items()}
+        GOALS: Final[dict] = {goal: date(int(day.split('.')[2]), int(day.split('.')[1]),  int(day.split('.')[0])) for goal, day in data.items()}
         
 
 '''
@@ -66,18 +73,20 @@ if MANAGEMENT:
         data = file.read().splitlines()
         #parsing bars for process types that programm will trace and all types
         BARS = [type_[:type_.find(' = ')] for type_ in data if equality_parser(type_, True)]
-        ALL_BARS = [type_[:type_.find(' = ')] for type_ in data]
+        ALL_BARS: Final[list] = [type_[:type_.find(' = ')] for type_ in data]
 
     with open('appData/settings/management/formula.txt', encoding='utf-8') as file:
         data = file.read().splitlines()
-        CONSUMPTION_RECALCULATOR = equality_parser(data[0], True)
+        CONSUMPTION_RECALCULATOR: Final[bool] = equality_parser(data[0], True)
     #Consumption recalculator takes formula with two variables that shows the change of transition of under 
     # and overconsumption of some process types to next few days
     if CONSUMPTION_RECALCULATOR:
-        DAYS_OVERCONSUMPTION, OVERCONSUMPTION_FORMULA = int(equality_parser(data[2])), equality_parser(data[3])
-        DAYS_UNDERCONSUMPTION, UNDERCONSUMPTION_FORMULA = int(equality_parser(data[5])), equality_parser(data[6])
+        DAYS_OVERCONSUMPTION:     Final[int] = int(equality_parser(data[2]))
+        OVERCONSUMPTION_FORMULA:  Final[str] =     equality_parser(data[3])
+        DAYS_UNDERCONSUMPTION:    Final[int] = int(equality_parser(data[5]))
+        UNDERCONSUMPTION_FORMULA: Final[str] =     equality_parser(data[6])
         with open('appData/settings/management/norm_schedule.json', encoding='utf-8') as file:
-            NORM_SCHEDULE = load(file)
+            NORM_SCHEDULE: Final[dict] = load(file)
         with open('appData/settings/management/norm_settings.txt', encoding='utf-8') as file:
             data = file.read().splitlines()
             NORM_SETTINGS = {type_[:type_.find(' = ')]:{} for type_ in data} 
