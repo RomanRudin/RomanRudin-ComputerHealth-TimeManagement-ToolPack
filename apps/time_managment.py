@@ -28,10 +28,6 @@ class Management(QWidget):
         self.statistic_of_programms_canvas = FigureCanvasQTAgg(self.statistic_of_programms)
         main_layout.addWidget(self.statistic_of_programms_canvas, stretch=3)
 
-        self.last_two_weeks = plt.figure()
-        self.last_two_weeks_canvas = FigureCanvasQTAgg(self.last_two_weeks)
-        main_layout.addWidget(self.last_two_weeks_canvas, stretch=3)
-
         #choosing random colors for bars
         self.color_data = {
             'Game': random_bar_colors.pop(randint(0, len(random_bar_colors) - 1)),
@@ -64,11 +60,9 @@ class Management(QWidget):
     def plot(self):
         self.statistic_in_spheres.clear()
         self.statistic_of_programms.clear()
-        self.last_two_weeks.clear()
 
         ax1 = self.statistic_in_spheres.add_subplot(111)
         ax2 = self.statistic_of_programms.add_subplot(111)
-        ax3 = self.last_two_weeks.add_subplot(111)
 
 
         time_in_sphere = {bar: sum(data[1] / 3600 for data in log.logs.values() if data[0] == bar) for bar in BARS}
@@ -110,4 +104,3 @@ class Management(QWidget):
 
         self.statistic_in_spheres_canvas.draw()
         self.statistic_of_programms_canvas.draw()
-        self.last_two_weeks_canvas.draw()

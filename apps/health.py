@@ -67,10 +67,9 @@ class Health_popup_standart(QWidget):
     def set_location_on_screen(self):
         ag = QDesktopWidget().availableGeometry()
         sg = QDesktopWidget().screenGeometry()
-        widget = self.geometry()
         
-        x = ag.width() - widget.width()
-        y = 2 * ag.height() - sg.height() - widget.height()
+        x = ag.width() - 400
+        y = 2 * ag.height() - sg.height() - 300
         self.move(x, y)
 
     #Sound playing
