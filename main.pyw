@@ -145,7 +145,7 @@ class ThreadController():
                 exersize_data['timer_counter'] = HEALTH_SETTINHS[exersize][1]
 
 
-    def schedule_thread():
+    def schedule_thread(self):
         pass
 
 
