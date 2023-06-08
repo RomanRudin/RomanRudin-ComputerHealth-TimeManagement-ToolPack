@@ -1,54 +1,4 @@
 {
-    "2023-05-20": {
-        "Game": 25,
-        "Entartainment": 347,
-        "Code": 120,
-        "Learning": 90,
-        "Browser": 359,
-        "Social Network": 359,
-        "Tool": 384,
-        "Work": 0
-    },
-    "2023-05-21": {
-        "Game": -69,
-        "Entartainment": 288,
-        "Code": 82,
-        "Learning": 77,
-        "Browser": 300,
-        "Social Network": 300,
-        "Tool": 325,
-        "Work": 0
-    },
-    "2023-05-22": {
-        "Game": -86,
-        "Entartainment": 344,
-        "Code": 85,
-        "Learning": 40,
-        "Browser": 350,
-        "Social Network": 350,
-        "Tool": 400,
-        "Work": 0
-    },
-    "2023-05-23": {
-        "Game": -57,
-        "Entartainment": 416,
-        "Code": 331,
-        "Learning": 26,
-        "Browser": 420,
-        "Social Network": 420,
-        "Tool": 520,
-        "Work": 0
-    },
-    "2023-05-24": {
-        "Game": -39,
-        "Entartainment": 338,
-        "Code": 300,
-        "Learning": 59,
-        "Browser": 341,
-        "Social Network": 341,
-        "Tool": 384,
-        "Work": 0
-    },
     "2023-05-25": {
         "Game": 4,
         "Entartainment": 374,
@@ -117,6 +67,26 @@
         "Browser": 36,
         "Social Network": 5,
         "Tool": 39,
+        "Work": 0
+    },
+    "2023-06-04": {
+        "Game": -107,
+        "Entartainment": 21,
+        "Code": 21,
+        "Learning": 69,
+        "Browser": 52,
+        "Social Network": 23,
+        "Tool": 54,
+        "Work": 0
+    },
+    "2023-06-08": {
+        "Game": 0,
+        "Entartainment": 0,
+        "Code": 0,
+        "Learning": 0,
+        "Browser": 0,
+        "Social Network": 0,
+        "Tool": 0,
         "Work": 0
     }
 }

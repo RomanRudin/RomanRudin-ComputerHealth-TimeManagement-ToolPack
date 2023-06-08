@@ -80,8 +80,6 @@ class Schedule(QWidget):
         for case, time in data.items():
             line = QHBoxLayout()
 
-            print(case)
-
             case_name = QLabel(case)
             case_name.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
             line.addWidget(case_name)

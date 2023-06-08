@@ -27,13 +27,11 @@ def norm_recalculating() -> dict:
     #reading data from files if no recalculations were made today yet
     if data['date'] != str(date.today()):
         for day in range(max_days):
-            print(day)
             if path.exists(f'log/{date.today() - timedelta(days=day + 1)}.txt'):
                 with open(f'log/{date.today() - timedelta(days=day + 1)}.txt', encoding='utf-8') as file:
                     reader = file.read().splitlines()
                 weekday = str((date.today() - timedelta(days=day + 1)).weekday())
                 logs_day = str(date.today() - timedelta(days=day + 1))
-                print(logs_day)
                 for bar in ALL_BARS:
                     '''
                     I'm so sorry for this line of code...

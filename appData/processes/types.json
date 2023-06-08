@@ -43,5 +43,10 @@
     "consent": "Tool",
     "sh": "Code",
     "vim": "Code",
-    "Magicka": "Game"
+    "Magicka": "Game",
+    "RimWorldWin64": "Game",
+    "EasyAntiCheat_launcher": "Game",
+    "r5apex": "Game",
+    "javaw": "Game",
+    "CRWindowsClientService": "Code"
 }

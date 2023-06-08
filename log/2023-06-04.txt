@@ -1,0 +1,11 @@
+Social Network 	 15900 	 Discord
+Browser 	 15900 	 msedge
+Code 	 15900 	 Code
+Entartainment 	 15840 	 steam
+Tool 	 15840 	 DeepL
+Game 	 2580 	 csgo
+Social Network 	 960 	 Telegram
+Game 	 60 	 RimWorldWin64
+Code 	 0 	 pyinstaller
+Code 	 0 	 pip
+Tool 	 0 	 mspaint

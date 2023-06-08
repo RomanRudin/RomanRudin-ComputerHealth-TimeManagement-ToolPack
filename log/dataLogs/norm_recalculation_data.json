@@ -1,27 +1,11 @@
 {
-    "Game": {
-        "0": 60
-    },
-    "Entartainment": {
-        "0": -16.0
-    },
-    "Code": {
-        "0": 10.0
-    },
-    "Learning": {
-        "0": 120
-    },
-    "Browser": {
-        "0": -120.0
-    },
-    "Social Network": {
-        "0": -17.0
-    },
-    "Tool": {
-        "0": -133.0
-    },
-    "Work": {
-        "0": 0
-    },
-    "date": "2023-06-03"
+    "Game": {},
+    "Entartainment": {},
+    "Code": {},
+    "Learning": {},
+    "Browser": {},
+    "Social Network": {},
+    "Tool": {},
+    "Work": {},
+    "date": "2023-06-08"
 }
