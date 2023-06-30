@@ -1,8 +1,8 @@
-Social Network 	 22980 	 Discord
-Browser 	 22980 	 msedge
-Code 	 22980 	 Code
-Entartainment 	 22920 	 steam
-Tool 	 22920 	 DeepL
+Social Network 	 23160 	 Discord
+Browser 	 23160 	 msedge
+Code 	 23160 	 Code
+Entartainment 	 23100 	 steam
+Tool 	 23100 	 DeepL
 Social Network 	 18120 	 Telegram
 Learning 	 3720 	 chrome
 Game 	 2940 	 r5apex

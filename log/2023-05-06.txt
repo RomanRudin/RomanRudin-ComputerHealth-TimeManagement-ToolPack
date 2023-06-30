@@ -1,8 +1,0 @@
-Social Network 	 39660 	 Discord
-Browser 	 39660 	 msedge
-Tool 	 39600 	 DeepL
-Entartainment 	 30660 	 steam
-Game 	 14760 	 Terraria
-Game 	 9300 	 csgo
-Learning 	 6480 	 chrome
-Tool 	 3900 	 obs64

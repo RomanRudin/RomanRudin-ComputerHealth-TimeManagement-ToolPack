@@ -1,8 +1,0 @@
-Social Network 	 23520 	 Discord
-Browser 	 23520 	 msedge
-Entartainment 	 23460 	 steam
-Tool 	 23460 	 DeepL
-Game 	 15960 	 Terraria
-Tool 	 12660 	 obs64
-Code 	 960 	 QtWebEngineProcess
-Game 	 900 	 starwarsbattlefront

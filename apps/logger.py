@@ -45,3 +45,8 @@ class Log():
             for _ in range(len(logs) - 28):
                 remove(f'{self.dir}/{logs.pop(logs.index(logs[0]))}')
 
+
+
+class TestLog(Log):
+    def __init__(self, type):
+        super().__init__(f'testLogs/{type}')

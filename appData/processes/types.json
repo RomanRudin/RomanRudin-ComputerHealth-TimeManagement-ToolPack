@@ -48,5 +48,10 @@
     "EasyAntiCheat_launcher": "Game",
     "r5apex": "Game",
     "javaw": "Game",
-    "CRWindowsClientService": "Code"
+    "CRWindowsClientService": "Code",
+    "eve_crashmon": "Game",
+    "xampp-control": "Code",
+    "httpd": "Code",
+    "mysqld": "Code",
+    "Postman Agent": "Code"
 }

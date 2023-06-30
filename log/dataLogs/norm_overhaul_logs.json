@@ -1,55 +1,5 @@
 {
-    "2023-05-25": {
-        "Game": 4,
-        "Entartainment": 374,
-        "Code": 159,
-        "Learning": 81,
-        "Browser": 377,
-        "Social Network": 377,
-        "Tool": 365,
-        "Work": 0
-    },
-    "2023-05-26": {
-        "Game": -25,
-        "Entartainment": 464,
-        "Code": 272,
-        "Learning": 74,
-        "Browser": 466,
-        "Social Network": 507,
-        "Tool": 478,
-        "Work": 0
-    },
-    "2023-05-27": {
-        "Game": 22,
-        "Entartainment": 490,
-        "Code": 337,
-        "Learning": 84,
-        "Browser": 489,
-        "Social Network": 635,
-        "Tool": 501,
-        "Work": 0
-    },
-    "2023-05-28": {
-        "Game": -16,
-        "Entartainment": 462,
-        "Code": 218,
-        "Learning": 63,
-        "Browser": 461,
-        "Social Network": 583,
-        "Tool": 467,
-        "Work": 0
-    },
-    "2023-05-29": {
-        "Game": -45,
-        "Entartainment": 487,
-        "Code": 225,
-        "Learning": 53,
-        "Browser": 511,
-        "Social Network": 672,
-        "Tool": 562,
-        "Work": 0
-    },
-    "2023-06-02": {
+    "2023-06-08": {
         "Game": 0,
         "Entartainment": 0,
         "Code": 0,
@@ -59,27 +9,37 @@
         "Tool": 0,
         "Work": 0
     },
-    "2023-06-03": {
-        "Game": -18,
-        "Entartainment": 4,
-        "Code": 3,
-        "Learning": 36,
-        "Browser": 36,
-        "Social Network": 5,
-        "Tool": 39,
+    "2023-06-09": {
+        "Game": -21,
+        "Entartainment": 117,
+        "Code": 98,
+        "Learning": 17,
+        "Browser": 115,
+        "Social Network": 206,
+        "Tool": 123,
         "Work": 0
     },
-    "2023-06-04": {
-        "Game": -107,
-        "Entartainment": 21,
-        "Code": 21,
-        "Learning": 69,
-        "Browser": 52,
-        "Social Network": 23,
-        "Tool": 54,
+    "2023-06-10": {
+        "Game": 59,
+        "Entartainment": 238,
+        "Code": 82,
+        "Learning": 52,
+        "Browser": 237,
+        "Social Network": 324,
+        "Tool": 244,
         "Work": 0
     },
-    "2023-06-08": {
+    "2023-06-13": {
+        "Game": 0,
+        "Entartainment": 0,
+        "Code": 0,
+        "Learning": 0,
+        "Browser": 0,
+        "Social Network": 0,
+        "Tool": 0,
+        "Work": 0
+    },
+    "2023-06-22": {
         "Game": 0,
         "Entartainment": 0,
         "Code": 0,

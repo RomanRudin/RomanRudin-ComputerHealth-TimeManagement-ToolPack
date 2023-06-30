@@ -4,8 +4,8 @@ from datetime import date
 from PyQt5.QtWidgets import QApplication
 from apps.logger import *
 from apps.module import *
-from appData.settings.settings_parser import BARS, MANAGEMENT, CONSUMPTION_RECALCULATOR, HEALTH, SCHEDULE, \
-    HEALTH_SETTINHS, stylesheet_popup
+from appData.settings.settings_parser import BARS, MANAGEMENT, \
+    CONSUMPTION_RECALCULATOR, HEALTH, SCHEDULE, HEALTH_SETTINHS, stylesheet_popup
 from apps.health import Health_popup_special, Health_popup_standart
 from DialogWindow import DialogWindow
 import threading
@@ -21,9 +21,12 @@ class ThreadController():
         self.bars_in_count = []
         self.health_time_counter = {}
 
-        self.timer = 60          #duration between two tracking sessions
-        self.management_norm_counter = 5    #duration (in 'timers' units of measure) between two recalculating sessions
+        #duration between two tracking sessions
+        self.timer = 60          
+        #duration (in 'timers' units of measure) between two recalculating sessions
+        self.management_norm_counter = 5    
         self.stopped = False
+        
         if MANAGEMENT:
             with open('appData/processes/NonTrack.conf', 'r', encoding='utf-8') as file:
                 self.NonTrack = file.read().splitlines()         #untracked processes (such as system processes)
