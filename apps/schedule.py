@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLabel, QPushButton, QLineEdit, QListWidget
 from datetime import date
-from appData.settings.settings_parser import TIMETABLE_SETTINGS, TASK_LIST_SETTINGS, GOALS
+from appData.settings.settings_parser import TIMETABLE_SETTINGS, TASK_LIST_SETTINGS, GOALS, ABSOLUTE_PATH
 from apps.pyqt_module import delete_items_of_layout
 from json import dump, load
 
@@ -25,7 +25,7 @@ class Schedule(QWidget):
         if TIMETABLE_SETTINGS['is_on']:
             from appData.settings.settings_parser import TIMETABLE
             
-            with open('log/dataLogs/schedule_log.json') as file:
+            with open(ABSOLUTE_PATH + 'log/dataLogs/schedule_log.json') as file:
                 TIMETABLE_SAVED = load(file)
             if TIMETABLE_SAVED['date'] != str(date.today()):
                 a, b, c = map(int, TIMETABLE_SAVED['date'].split('-'))
@@ -34,7 +34,7 @@ class Schedule(QWidget):
                 else:
                     TIMETABLE_SAVED['today'] = TIMETABLE[str(date.today().weekday())]
                 TIMETABLE_SAVED['tomorrow'] = TIMETABLE[str((date.today().weekday() + 1) % 7)]
-                with open('log/dataLogs/schedule.json', 'w', encoding='utf-8') as file:
+                with open(ABSOLUTE_PATH + 'log/dataLogs/schedule.json', 'w', encoding='utf-8') as file:
                     TIMETABLE_SAVED['date'] = str(date.today())
                     dump(TIMETABLE_SAVED, file)
 
@@ -54,7 +54,7 @@ class Schedule(QWidget):
             
             self.task_list_tomorrow = QVBoxLayout()
             tomorrow_layout.addLayout(self.task_list_tomorrow)
-            with open('log/dataLogs/task_log.json') as file:
+            with open(ABSOLUTE_PATH + 'log/dataLogs/task_log.json') as file:
                 TASK_LIST_SAVED = load(file)
                         
             if TASK_LIST_SAVED['date'] != str(date.today()):
@@ -64,7 +64,7 @@ class Schedule(QWidget):
                 else:
                     TASK_LIST_SAVED['today'] = TASK_LIST[str(date.today().weekday())]
                 TASK_LIST_SAVED['tomorrow'] = TASK_LIST[str((date.today().weekday() + 1) % 7)]
-                with open('log/dataLogs/task_log.json', 'w', encoding='utf-8') as file:
+                with open(ABSOLUTE_PATH + 'log/dataLogs/task_log.json', 'w', encoding='utf-8') as file:
                     TASK_LIST_SAVED['date'] = str(date.today())
                     dump(TASK_LIST_SAVED, file)
 

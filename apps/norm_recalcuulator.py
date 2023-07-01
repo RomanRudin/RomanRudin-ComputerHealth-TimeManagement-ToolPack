@@ -1,7 +1,7 @@
 from datetime import date, timedelta
 from appData.settings.settings_parser import ALL_BARS, OVERCONSUMPTION_FORMULA, \
     UNDERCONSUMPTION_FORMULA, NORM_SCHEDULE, DAYS_OVERCONSUMPTION, DAYS_UNDERCONSUMPTION, \
-    NORM_SETTINGS
+    NORM_SETTINGS, ABSOLUTE_PATH
 from json import load, dump
 from os import path
 
@@ -15,10 +15,10 @@ def norm_recalculating() -> dict:
     consumption_list = {bar:{'sum': 0} for bar in ALL_BARS}
 
     #getting las saved data about recalculations
-    with open('log/dataLogs/norm_recalculation_data.json', encoding='utf-8') as file:
+    with open(ABSOLUTE_PATH + 'log/dataLogs/norm_recalculation_data.json', encoding='utf-8') as file:
         data = load(file)
     #getting overhauled data from file
-    with open('log/dataLogs/norm_overhaul_logs.json', encoding='utf-8') as file:
+    with open(ABSOLUTE_PATH + 'log/dataLogs/norm_overhaul_logs.json', encoding='utf-8') as file:
         norm = load(file)
 
     #getting the maximum "file date depth level" the programm will go
@@ -57,7 +57,7 @@ def norm_recalculating() -> dict:
                             full_consumption_list[bar][str(day)] += norm[logs_day][bar]
 
         #saving this data for fast acess
-        with open('log/dataLogs/norm_recalculation_data.json', 'w', encoding='utf-8') as file:
+        with open(ABSOLUTE_PATH + 'log/dataLogs/norm_recalculation_data.json', 'w', encoding='utf-8') as file:
             full_consumption_list['date'] = str(date.today())
             dump(full_consumption_list, file, indent=4)
             full_consumption_list.pop('date')
@@ -91,7 +91,7 @@ def norm_recalculating() -> dict:
                 consumption_list[bar]['sum'] = NORM_SETTINGS[bar]['max_increasment'] * 3600
     
     #changing overhauled logs because of new data
-    with open('log/dataLogs/norm_overhaul_logs.json', 'w', encoding='utf-8') as file:
+    with open(ABSOLUTE_PATH + 'log/dataLogs/norm_overhaul_logs.json', 'w', encoding='utf-8') as file:
         changed_norm = norm.copy()
         for day in norm.keys():
             a, b, c = map(int, day.split('-'))

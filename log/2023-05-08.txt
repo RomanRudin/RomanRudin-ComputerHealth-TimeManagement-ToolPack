@@ -1,6 +1,0 @@
-Social Network 	 23040 	 Discord
-Browser 	 23040 	 msedge
-Entartainment 	 22980 	 steam
-Tool 	 22980 	 DeepL
-Game 	 14760 	 Terraria
-Code 	 8640 	 Code

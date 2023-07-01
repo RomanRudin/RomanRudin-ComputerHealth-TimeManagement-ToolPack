@@ -5,13 +5,13 @@ from PyQt5.QtWidgets import QApplication
 from apps.logger import *
 from apps.module import *
 from appData.settings.settings_parser import BARS, MANAGEMENT, \
-    CONSUMPTION_RECALCULATOR, HEALTH, SCHEDULE, HEALTH_SETTINHS, stylesheet_popup
+    CONSUMPTION_RECALCULATOR, HEALTH, SCHEDULE, HEALTH_SETTINHS, stylesheet_popup, ABSOLUTE_PATH
 from apps.health import Health_popup_special, Health_popup_standart
 from DialogWindow import DialogWindow
 import threading
 from json import load
 
-log = Log('log')    #logger
+log = Log(ABSOLUTE_PATH + 'log')    #logger
 
 
 class ThreadController():
@@ -28,13 +28,13 @@ class ThreadController():
         self.stopped = False
         
         if MANAGEMENT:
-            with open('appData/processes/NonTrack.conf', 'r', encoding='utf-8') as file:
+            with open(ABSOLUTE_PATH + 'appData/processes/NonTrack.conf', 'r', encoding='utf-8') as file:
                 self.NonTrack = file.read().splitlines()         #untracked processes (such as system processes)
-            with open('appData/processes/killMeProcesses.conf', 'r', encoding='utf-8') as file:
+            with open(ABSOLUTE_PATH + 'appData/processes/killMeProcesses.conf', 'r', encoding='utf-8') as file:
                 self.killMeProcesses = file.read().splitlines()  #processes user don't want to deal with at all
-            with open('appData/processes/types.json', 'r', encoding='utf-8') as file:
+            with open(ABSOLUTE_PATH + 'appData/processes/types.json', 'r', encoding='utf-8') as file:
                 self.types = load(file)                          #types of every known for programm process
-            with open('appData/processes/DoNotDisturbProcesses.conf', 'r', encoding='utf-8') as file:
+            with open(ABSOLUTE_PATH + 'appData/processes/DoNotDisturbProcesses.conf', 'r', encoding='utf-8') as file:
                 self.doNotDisturbProcesses = file.read().splitlines()
         if SCHEDULE:
             pass    #TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -92,18 +92,18 @@ class ThreadController():
                 process = line[0][:-4]
                 if line[3] != '0' and not process in self.NonTrack and not process in self.killMeProcesses: 
                     if not process in log.logs: #if process hadn't been tracked today
-                        if process in types:
-                            log.logs.update({process: [types[process], 0, line[1]]})
+                        if process in self.types:
+                            log.logs.update({process: [self.types[process], 0, line[1]]})
                         else:   #asking user about what type this process has
                             self.stopped = True
                             app = QApplication(argv)
-                            dialog = DialogWindow(process, log, types)
+                            dialog = DialogWindow(process, log, self.types)
                             dialog.resize(400, 300)
                             dialog.show()
                             app.exec_()
                             if dialog.process_added:
-                                types = dialog.types
-                                log.logs.update({process: [types[process], 0]})
+                                self.types = dialog.types
+                                log.logs.update({process: [self.types[process], 0]})
                             else:
                                 self.NonTrack.append(process)
                             #I'm really sorry for the next 2 lines of code, but this was the only way the programm won't destroy itself after asking user
