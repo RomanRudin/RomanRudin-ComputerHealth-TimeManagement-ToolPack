@@ -10,12 +10,34 @@ from apps.health import Health_popup_special, Health_popup_standart
 from DialogWindow import DialogWindow
 import threading
 from json import load
+import ctypes
+
+enumWindows = ctypes.windll.user32.EnumWindows
+enumWindowsProc = ctypes.WINFUNCTYPE(ctypes.c_bool, ctypes.c_int, ctypes.POINTER(ctypes.c_int))
+getWindowTextLength = ctypes.windll.user32.GetWindowTextLengthW 
+getWindowText = ctypes.windll.user32.GetWindowTextW
 
 log = Log(ABSOLUTE_PATH + 'log')    #logger
 
+#Getting current window (stolen from pyautogui) :)
+def getActiveWindowTitle() -> str:
+    global activeWindowTitle
+    activeWindowHwnd = ctypes.windll.user32.GetForegroundWindow()
+    if activeWindowHwnd == 0:
+        raise "ctypes.windll.user32.GetForegroundWindow() is 0"
+    def foreach_window(hWnd, lParam) -> bool:
+        global activeWindowTitle
+        if hWnd == activeWindowHwnd:
+            length = getWindowTextLength(hWnd)
+            buff = ctypes.create_unicode_buffer(length + 1)
+            getWindowText(hWnd, buff, length + 1)
+            activeWindowTitle = buff.value
+        return True
+    enumWindows(enumWindowsProc(foreach_window), 0)
+    return str(activeWindowTitle).split(" - ")[-1]
 
 class ThreadController():
-    def __init__(self):
+    def __init__(self) -> None:
 
         self.time_counter = {}
         self.bars_in_count = []
@@ -30,8 +52,6 @@ class ThreadController():
         if MANAGEMENT:
             with open(ABSOLUTE_PATH + 'appData/processes/NonTrack.conf', 'r', encoding='utf-8') as file:
                 self.NonTrack = file.read().splitlines()         #untracked processes (such as system processes)
-            with open(ABSOLUTE_PATH + 'appData/processes/killMeProcesses.conf', 'r', encoding='utf-8') as file:
-                self.killMeProcesses = file.read().splitlines()  #processes user don't want to deal with at all
             with open(ABSOLUTE_PATH + 'appData/processes/types.json', 'r', encoding='utf-8') as file:
                 self.types = load(file)                          #types of every known for programm process
             with open(ABSOLUTE_PATH + 'appData/processes/DoNotDisturbProcesses.conf', 'r', encoding='utf-8') as file:
@@ -52,7 +72,7 @@ class ThreadController():
             counter += 1
     
     
-    def main(self):
+    def main(self) -> None:
         if not self.stopped:
             #Multiple tools (such as mangement, health nd etc.) need to be done at the sme trcking itertion, 'cause I don't want programm to take multiple threads 
             if MANAGEMENT:
@@ -63,14 +83,14 @@ class ThreadController():
                 self.health_thread(doNotDisturb)
 
 
-    def load(self):
+    def load(self) -> None:
         if HEALTH:
             for exersize, exersize_data in HEALTH_SETTINHS.items():
                 self.health_time_counter[exersize] = {'timer_counter': exersize_data[1] * 60 // self.timer, \
                     'type': exersize_data[0]}
 
 
-    def get_norm(self):
+    def get_norm(self) -> None:
         if CONSUMPTION_RECALCULATOR and MANAGEMENT:
             from appData.settings.settings_parser import ALL_BARS, NORM_SETTINGS, NORM_SCHEDULE
             from apps.norm_recalcuulator import norm_recalculating
@@ -82,52 +102,35 @@ class ThreadController():
                     self.bars_in_count.append(bar)
 
 
-    def management_thread(self):
+    def management_thread(self) -> None:
         doNotDisturb = False
-        tasks = commandExecutionP('tasklist /FO CSV')
-        task_list = set()   #my own interpretaton of checking on already tracked programm processes (because one programm can have multiple of them with different ids)
-        for line in tasks:        
-            line = line.replace('"', '').split(',')
-            if len(line) > 1: 
-                process = line[0][:-4]
-                if line[3] != '0' and not process in self.NonTrack and not process in self.killMeProcesses: 
-                    if not process in log.logs: #if process hadn't been tracked today
-                        if process in self.types:
-                            log.logs.update({process: [self.types[process], 0, line[1]]})
-                        else:   #asking user about what type this process has
-                            self.stopped = True
-                            app = QApplication(argv)
-                            dialog = DialogWindow(process, log, self.types)
-                            dialog.resize(400, 300)
-                            dialog.show()
-                            app.exec_()
-                            if dialog.process_added:
-                                self.types = dialog.types
-                                log.logs.update({process: [self.types[process], 0]})
-                            else:
-                                self.NonTrack.append(process)
-                            #I'm really sorry for the next 2 lines of code, but this was the only way the programm won't destroy itself after asking user
-                            del dialog
-                            del app
-                            self.stopped = False
-                    elif process not in task_list: #if this programms processes weren't tracked in this tracking session
-                        log.logs[process][1] += self.timer
-                        task_list.add(process)
-                        if log.logs[process][0] in self.bars_in_count:
-                            self.time_counter[log.logs[process][0]] -= self.timer #timer before possibility to close the process on programm's purpose (because user spent to much time on this category already)
-                    if process in self.doNotDisturbProcesses:
-                        doNotDisturb = True
-                elif process in self.killMeProcesses: 
-                    commandExecution('taskkill /PID ' + line[1])
-        for bar, time in self.time_counter.items():
-            if time < 0:
-                self.killMeProcesses.extend([process for process, data in log.logs.items() if data[0] == bar and process not in self.killMeProcesses])
-                self.time_counter[bar] = 0
+        current_window_title = getActiveWindowTitle()
+        if not current_window_title in self.NonTrack: 
+            if not current_window_title in log.logs: #if process hadn't been tracked today
+                if current_window_title in self.types:
+                    log.logs.update({current_window_title: [self.types[current_window_title], 0]})
+                else:   #asking user about what type this process has
+                    self.stopped = True
+                    app = QApplication(argv)
+                    dialog = DialogWindow(current_window_title, log, self.types)
+                    dialog.resize(400, 300)
+                    dialog.show()
+                    app.exec_()
+                    if dialog.process_added:
+                        self.types = dialog.types
+                        log.logs.update({current_window_title: [self.types[current_window_title], 0]})
+                    else:
+                        self.NonTrack.append(current_window_title)
+                    #I'm really sorry for the next 2 lines of code, but this was the only way the programm won't destroy itself after asking user
+                    del dialog
+                    del app
+                    self.stopped = False
+            log.logs[current_window_title][1] += self.timer
         log.write()
         return doNotDisturb
 
         
-    def health_thread(self, doNotDisturb):
+    def health_thread(self, doNotDisturb) -> None:
         for exersize, exersize_data in self.health_time_counter.items():
             exersize_data['timer_counter'] -= 1
             if exersize_data['timer_counter'] <= 0 and not doNotDisturb:
@@ -148,7 +151,7 @@ class ThreadController():
                 exersize_data['timer_counter'] = HEALTH_SETTINHS[exersize][1]
 
 
-    def schedule_thread(self):
+    def schedule_thread(self) -> None:
         pass
 
 

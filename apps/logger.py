@@ -6,13 +6,12 @@ class Log():
     def __init__(self, dir):
         self.dir = dir
         self.path = f'{dir}/{date.today()}.txt'
-        self.types = f''
         self.logs = self.__read()
         self.__remove_previous()
         self.new_session = True
         '''
         {
-            procces: [type, time, id],
+            procces: [type, time],
         }
         '''
 

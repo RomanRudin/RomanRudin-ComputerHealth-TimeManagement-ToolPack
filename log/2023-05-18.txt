@@ -1,8 +1,0 @@
-Social Network 	 29700 	 Discord
-Browser 	 29700 	 msedge
-Entartainment 	 29640 	 steam
-Tool 	 29640 	 DeepL
-Learning 	 26520 	 chrome
-Game 	 6720 	 csgo
-Code 	 4320 	 Code
-Tool 	 120 	 mspaint
