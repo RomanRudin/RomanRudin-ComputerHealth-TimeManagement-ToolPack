@@ -1,1 +1,7 @@
-Code 	 600 	 Visual Studio Code
+Code 	 915 	 Visual Studio Code
+Browser 	 25 	 Google Chrome
+Entartainment 	 16 	 Steam
+Tool 	 14 	 Главная
+Code 	 13 	 Microsoft Visual Studio
+Social Network 	 5 	 Discord
+Code 	 1 	 Microsoft Visual Studio Community 2022

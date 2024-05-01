@@ -39,12 +39,13 @@ class Log():
 
     def __remove_previous(self) -> None:
         logs = [file for file in listdir(self.dir)]
-        logs.pop(-1)
-        if len(logs) > 28:
-            for _ in range(len(logs) - 28):
-                remove(f'{self.dir}/{logs.pop(logs.index(logs[0]))}')
-
-
+        try:
+            logs.pop(-1)
+            if len(logs) > 28:
+                for _ in range(len(logs) - 28):
+                    remove(f'{self.dir}/{logs.pop(logs.index(logs[0]))}')
+        except IndexError:
+            raise IndexError
 
 class TestLog(Log):
     def __init__(self, type):

@@ -1,202 +1,271 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLabel, QPushButton, QLineEdit, QListWidget
-from datetime import date
-from appData.settings.settings_parser import TIMETABLE_SETTINGS, TASK_LIST_SETTINGS, GOALS, ABSOLUTE_PATH
-from apps.pyqt_module import delete_items_of_layout
+ #!
+#todo
+#todo
+#todo
+#todo
+#todo
+#todo
+#todo
+#todo
+#todo
+from PyQt5.QtWidgets import QApplication, QLineEdit, QLabel, QHBoxLayout, QVBoxLayout, QPushButton, QWidget, QListWidget, QListWidgetItem, QSizePolicy
+from datetime import datetime
+from sys import argv, exit
 from json import dump, load
 
+STATISTICS_DAYS = [0, 1, 3, 7]
+DELETE_ADTER = 28  
+
+#FOrmatting of data.json:
+#
+# data = {
+#   task_name_1: {
+#       "is_done": bool,
+#       "deadline": datetime,
+#       "importance": int,
+#       "value": int,
+#       "finished": datetime,
+#   },
+#   task_name_2: {
+#       ...
+#   }.
+#   ...
+# }
+
+
 class Schedule(QWidget):
-    def __init__(self):
+    def __init__(self): #path: str):
         super().__init__()
-        main_layout = QVBoxLayout()
+        
+        self.data = self.read_data()
 
+        self.main_layout = QHBoxLayout()
 
-        self.goals = QListWidget()
-        self.goals.addItems(GOALS.keys())
-        self.goals.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        main_layout.addWidget(self.goals)
+        self.statistics_layout = QVBoxLayout()        
+        self.main_layout.addLayout(self.statistics_layout, stretch=1)
+        
+        self.tasks_layout = QVBoxLayout()
+        tasks_label = QLabel("Tasks")
+        tasks_label.setObjectName('tasks_main_label')
+        tasks_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.tasks_layout.addWidget(tasks_label)
+        self.main_layout.addLayout(self.tasks_layout, stretch=2)
 
+        self.tasks_list = QListWidget()
+        self.tasks_layout.addWidget(self.tasks_list, stretch=20)
+        self.tasks_list.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        today_layout = QHBoxLayout()
-        main_layout.addLayout(today_layout)
-        tomorrow_layout = QHBoxLayout()
-        main_layout.addLayout(tomorrow_layout)
+        buuton_layout = QHBoxLayout()
+        self.tasks_layout.addLayout(buuton_layout, stretch=2)
+        self.add_task_button = QPushButton("Add task")
+        self.save_button = QPushButton("Save")
+        self.add_task_button.setObjectName('add_task_button')
+        self.save_button.setObjectName('save_button')
+        self.add_task_button.clicked.connect(self.add_task)
+        self.save_button.clicked.connect(self.reset)
+        self.add_task_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.save_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        buuton_layout.addWidget(self.add_task_button, stretch=2)
+        buuton_layout.addWidget(self.save_button, stretch=1)
 
+        self.construct()
+        self.setLayout(self.main_layout)
 
-        if TIMETABLE_SETTINGS['is_on']:
-            from appData.settings.settings_parser import TIMETABLE
-            
-            with open(ABSOLUTE_PATH + 'log/dataLogs/schedule_log.json') as file:
-                TIMETABLE_SAVED = load(file)
-            if TIMETABLE_SAVED['date'] != str(date.today()):
-                a, b, c = map(int, TIMETABLE_SAVED['date'].split('-'))
-                if (date.today() - date(a, b, c)).days == 1:
-                    TIMETABLE_SAVED['today'] = TIMETABLE_SAVED['tomorrow']
+    def construct(self):
+        #Statistics part:
+        statistics_label = QLabel("Statisticsr")
+        statistics_label.setObjectName('statistics_main_label')
+        statistics_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.statistics_layout.addWidget(statistics_label)
+        for index, days in enumerate(STATISTICS_DAYS):
+            statistics_panel = Statistics_panel(days, self)
+            statistics_panel.setObjectName('statistics_panel')
+            statistics_panel.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+            self.statistics_layout.addWidget(statistics_panel, stretch=(20 // len(STATISTICS_DAYS)))
+            if (index != len(STATISTICS_DAYS) - 1):
+                spacer = QLabel()
+                self.statistics_layout.addWidget(spacer, stretch=(12 // (len(STATISTICS_DAYS) - 1)))
+                
+        #tasks part:
+        for task, name in [[self.data[elem], elem] for elem in self.data.keys() if 
+                        ((not self.data[elem]["is_done"]) and (datetime.strptime(self.data[elem]["deadline"], "%d%m%Y") >= datetime.today()))]:
+            new_task = Task(name=str(name), deadline=task["deadline"],
+                            importance=task["importance"], value=task["value"],
+                            is_done=task["is_done"], parent=self)
+            # Clutch, that helps me customize QListWidgtItems 
+            listWidgetItem = QListWidgetItem(self.tasks_list)
+            listWidgetItem.setSizeHint(new_task.sizeHint())
+            self.tasks_list.addItem(listWidgetItem)
+            self.tasks_list.setItemWidget(listWidgetItem, new_task)
+
+    def reset(self):
+        self.save()
+        self.clear()
+        self.construct()
+
+    def __delete_items_of_layout(self, layout) -> None:
+        if layout is not None:
+            while layout.count():
+                item = layout.takeAt(0)
+                widget = item.widget()
+                if widget is not None:
+                    widget.setParent(None)
                 else:
-                    TIMETABLE_SAVED['today'] = TIMETABLE[str(date.today().weekday())]
-                TIMETABLE_SAVED['tomorrow'] = TIMETABLE[str((date.today().weekday() + 1) % 7)]
-                with open(ABSOLUTE_PATH + 'log/dataLogs/schedule.json', 'w', encoding='utf-8') as file:
-                    TIMETABLE_SAVED['date'] = str(date.today())
-                    dump(TIMETABLE_SAVED, file)
+                    self.__delete_items_of_layout(item.layout())
 
-            self.timetable_today = QVBoxLayout()
-            today_layout.addLayout(self.timetable_today)
-            self.__construct_timetable(self.timetable_today, TIMETABLE[str(date.today().weekday())])
+    def clear(self):
+        self.tasks_list.clear()
+        self.__delete_items_of_layout(self.statistics_layout)
 
-            self.timetable_tomorrow = QVBoxLayout()
-            tomorrow_layout.addLayout(self.timetable_tomorrow)
-            self.__construct_timetable(self.timetable_tomorrow, TIMETABLE[str((date.today().weekday() + 1) % 7)])
+    def read_data(self) -> dict: 
+        with open('data.json', 'r', encoding='utf-8') as file:
+            return load(file)
 
+    def add_task(self):
+        new_task = Task(name="", deadline="".join(str(datetime.today().date()).split("-")[::-1]),
+                            importance=1, value=1,
+                            is_done=False, parent=self)
+        listWidgetItem = QListWidgetItem(self.tasks_list)
+        listWidgetItem.setSizeHint(new_task.sizeHint())
+        self.tasks_list.addItem(listWidgetItem)
+        self.tasks_list.setItemWidget(listWidgetItem, new_task)
 
-        if TASK_LIST_SETTINGS['is_on']:
-            from appData.settings.settings_parser import TASK_LIST
-            self.task_list_today = QVBoxLayout()
-            today_layout.addLayout(self.task_list_today)
-            
-            self.task_list_tomorrow = QVBoxLayout()
-            tomorrow_layout.addLayout(self.task_list_tomorrow)
-            with open(ABSOLUTE_PATH + 'log/dataLogs/task_log.json') as file:
-                TASK_LIST_SAVED = load(file)
-                        
-            if TASK_LIST_SAVED['date'] != str(date.today()):
-                a, b, c = map(int, TASK_LIST_SAVED['date'].split('-'))
-                if (date.today() - date(a, b, c)).days == 1:
-                    TASK_LIST_SAVED['today'] = TASK_LIST_SAVED['tomorrow']
-                else:
-                    TASK_LIST_SAVED['today'] = TASK_LIST[str(date.today().weekday())]
-                TASK_LIST_SAVED['tomorrow'] = TASK_LIST[str((date.today().weekday() + 1) % 7)]
-                with open(ABSOLUTE_PATH + 'log/dataLogs/task_log.json', 'w', encoding='utf-8') as file:
-                    TASK_LIST_SAVED['date'] = str(date.today())
-                    dump(TASK_LIST_SAVED, file)
-
-            self.__construct_task_list(self.task_list_today, TASK_LIST_SAVED['today'])
-            self.__construct_task_list(self.task_list_tomorrow, TASK_LIST_SAVED['tomorrow'])      
+    def save(self):
+        with open('data.json', 'w', encoding='utf-8') as file:
+            dump(self.data, file, indent=4)
 
 
+
+
+class Statistics_panel(QWidget):
+    def __init__(self, days: int, parent: Schedule) -> None:
+        super().__init__()
+        main_layout = QVBoxLayout()       
         self.setLayout(main_layout)
 
+        self.days = days
+        self.parent = parent
+        self.data = self.get_data()
 
-
-    def __construct_timetable(self, parent, data):
-        for case, time in data.items():
-            line = QHBoxLayout()
-
-            case_name = QLabel(case)
-            case_name.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(case_name)
-            time_start = QLabel(str(time[0]))
-            time_start.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(time_start)
-            time_end = QLabel(str(time[1]))
-            time_end.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(time_end)
-            del_button = QPushButton()
-            del_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(del_button)
-            del_button.clicked.connect(lambda: delete_items_of_layout(line))
-
-            parent.addLayout(line)
+        label = QLabel(f"Last {days} days")
+        label.setObjectName('statistics_labl')
+        label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        main_layout.addWidget(label, stretch=1)
+        stats = QHBoxLayout()
+        main_layout.addLayout(stats, stretch=5)
+        done = QLabel("Done: " + str(self.data["done"]))
+        missed = QLabel("Missed: " + str(self.data["missed"]))
+        score = QLabel("Score: " + str(self.data["score"]))
+        done.setObjectName('statistics_done')
+        missed.setObjectName('statistics_missed')
+        score.setObjectName('statistics_score')
+        done.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        missed.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        score.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        stats.addWidget(done)
+        stats.addWidget(missed)
+        stats.addWidget(score, stretch=2)
         
-        last_line = QHBoxLayout()
-        button_line = QHBoxLayout()
-
-        add_once_button = QPushButton()
-        add_once_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        add_once_button.setDisabled(True)
-        button_line.addWidget(add_once_button)
-        add_button = QPushButton()
-        add_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        add_button.setDisabled(True)
-        button_line.addWidget(add_button)
-        adding_box = QLineEdit()
-        adding_box.setPlaceholderText('abcdef')
-        adding_box.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        last_line.addWidget(adding_box)
-        time_start_line = QLineEdit()
-        time_start_line.setPlaceholderText('abcdef')
-        time_start_line.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        last_line.addWidget(time_start_line)
-        time_end_line = QLineEdit()
-        time_end_line.setPlaceholderText('abcdef')
-        time_end_line.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        last_line.addWidget(time_end_line)
-
-        adding_box.editingFinished.connect(lambda: self.enabling_line(False, time_start_line))
-        time_start_line.editingFinished.connect(lambda: self.enabling_line(False, time_end_line))
-        time_end_line.editingFinished.connect(lambda: self.enabling_buttons(False, (add_once_button, add_button)))
-        add_once_button.clicked.connect(lambda: self.add_case(parent, True, (adding_box, time_start_line, time_end_line), (add_once_button, add_button)))
-        add_button.clicked.connect(lambda: self.add_case(parent, False, (adding_box, time_start_line, time_end_line), (add_once_button, add_button)))
-
-        last_line.addLayout(button_line)
-
-        parent.addLayout(last_line)
+    def get_data(self) -> dict:
+        data_statistiics = set()
+        score = 0
+        for elem, info in self.parent.data.items():
+            if (info["is_done"] and (0 <= (datetime.today() - datetime.strptime(info["finished"], "%d%m%Y")).days  <= self.days)) :
+                data_statistiics.add(elem)
+                score += info["importance"] * info["value"]
+            elif ((0 < (datetime.today() - datetime.strptime(info["deadline"], "%d%m%Y")).days <= self.days) and (not info["is_done"])):
+                data_statistiics.add(elem)
+                score -= info["importance"] * info["value"]
+                
+        return {
+            "done": len([self.parent.data[name] for name in data_statistiics
+                    if self.parent.data[name]["is_done"]]),
+            "missed": len([self.parent.data[name] for name in data_statistiics
+                    if ((not self.parent.data[name]["is_done"]) and 
+                    (0 < (datetime.today() - datetime.strptime(info["deadline"], "%d%m%Y")).days <= self.days))]),
+            "score": score
+        }
 
 
-    def __construct_task_list(self, parent, data): #TODO
-        for task, complition in data.items():
-            line = QHBoxLayout()
-            
-            completed_button = QPushButton()
-            completed_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(completed_button)
-            completed_button.clicked.connect(lambda: self.task_completed(line, complition))
-            case_name = QLabel(task)
-            case_name.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(case_name)
-            del_button = QPushButton()
-            del_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            line.addWidget(del_button)
-            del_button.clicked.connect(lambda: delete_items_of_layout(line))
 
-            self.task_completed(line, not complition)
+class Task(QWidget):
+    def __init__(self, name: str, deadline: datetime, importance: int, value: int, is_done: bool, parent: Schedule):
+        super().__init__()
+        main_layout = QHBoxLayout()       
+        self.setLayout(main_layout)
+
+        self.parent = parent 
+        self.is_done = is_done
+
+        self.done = QPushButton("Done") 
+        self.done.setObjectName('task_done_button')
+        self.done.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.done.clicked.connect(self.task_finished)
+        main_layout.addWidget(self.done, stretch=2)
+        if (self.is_done):
+            self.done.setEnabled(False)
+
+        self.name = QLineEdit()
+        self.previous_name = name
+        self.name.setText(name)
+        self.name.setObjectName("task_name")
+        self.name.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.name.editingFinished.connect(self.change_name)
+        main_layout.addWidget(self.name, stretch=5)
     
-            parent.addLayout(line)
+        self.deadline = QLineEdit()
+        self.deadline.setText(str(datetime.strptime(deadline, "%d%m%Y").date()))
+        self.deadline.setObjectName('task_deadline')
+        self.deadline.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.deadline.editingFinished.connect(lambda: self.save_data_part("deadline", "".join(self.deadline.text().split("-")[::-1])))
+        main_layout.addWidget(self.deadline, stretch=3)
+        
+        self.importance = QLineEdit()
+        self.importance.setText(str(importance))
+        self.importance.setObjectName('task_importace')
+        self.importance.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.importance.editingFinished.connect(lambda: self.save_data_part("importance", int(self.importance.text())))
+        main_layout.addWidget(self.importance, stretch=1)
+        
+        self.value = QLineEdit()
+        self.value.setText(str(value))
+        self.value.setObjectName('task_value')
+        self.value.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.value.editingFinished.connect(lambda: self.save_data_part("value", int(self.value.text())))
+        main_layout.addWidget(self.value, stretch=1)
 
-        last_line = QVBoxLayout()
-        button_line = QHBoxLayout()
+    def change_name(self):
+        if (self.previous_name != ""):
+            self.parent.data[self.name.text()] = self.parent.data.pop(self.previous_name)
+            return
+        self.parent.data[self.name.text()] = {
+            "is_done": self.is_done, "deadline": "".join(self.deadline.text().split("-")[::-1]), 
+            "importance": int(self.importance.text()), "value": int(self.importance.text()),
+            "finished": "".join(str(datetime.today().date()).split("-")[::-1])}
 
-        add_once_button = QPushButton()
-        add_once_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        add_once_button.setDisabled(True)
-        button_line.addWidget(add_once_button)
+    def save_data_part(self, key:str, data:any):
+        if self.name.text() == "":
+            return
+        self.parent.data[self.name.text()][key] = data
 
-        add_button = QPushButton()
-        add_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        add_button.setDisabled(True)
-        button_line.addWidget(add_button)
-
-        adding_box = QLineEdit()
-        adding_box.setPlaceholderText('abcdef')
-        adding_box.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        last_line.addWidget(adding_box)
-
-        adding_box.editingFinished.connect(lambda: self.enabling_task_buttons(False, (add_once_button, add_button)))
-        add_once_button.clicked.connect(lambda: self.add_task(parent, True, adding_box, (add_once_button, add_button)))
-        add_button.clicked.connect(lambda: self.add_task(parent, False, adding_box, (add_once_button, add_button)))
-
-        last_line.addLayout(button_line)
-
-        parent.addLayout(last_line)
-
-
-    def add_task(self, parent, once, line, buttons):
-        self.enabling_task_buttons(True, buttons)
+    def task_finished(self):
+        if self.done.isEnabled():
+            self.done.setEnabled(False)
+            self.is_done = True
+            self.save_data_part("is_done", True)
+            self.save_data_part("finished", "".join(str(datetime.today().date()).split("-")[::-1])) 
+            return
+        self.done.setEnabled(True)
+        self.is_done = False
+        self.save_data_part("is_done", True)    
+    
 
 
-    def add_case(self, parent, once, lines, buttons):
-        self.enabling_task_buttons(True, buttons)
-        for index, line in enumerate(lines):
-            if index >= 1:
-                self.enabling_line(True, line)
-
-
-    def enabling_line(self, is_enabled, line):
-        line.setDisabled(is_enabled)
-
-
-    def enabling_buttons(self, is_enabled, buttons):
-        for button in buttons:
-            button.setDisabled(is_enabled)
-
-
-    def task_completed(self, parent, completed):
-        pass
+if __name__ == "__main__":
+    app = QApplication([argv]) 
+    with open("style.qss", "r") as file:
+        app.setStyleSheet(file.read())
+    main = Schedule()
+    main.resize(1200, 800)
+    main.show()        
+    exit(app.exec_())

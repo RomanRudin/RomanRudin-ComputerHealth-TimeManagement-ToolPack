@@ -44,7 +44,7 @@ class ThreadController():
         self.health_time_counter = {}
 
         #duration between two tracking sessions
-        self.timer = 60          
+        self.timer = 1          
         #duration (in 'timers' units of measure) between two recalculating sessions
         self.management_norm_counter = 5    
         self.stopped = False
@@ -125,6 +125,7 @@ class ThreadController():
                     del dialog
                     del app
                     self.stopped = False
+        if not current_window_title in self.NonTrack: 
             log.logs[current_window_title][1] += self.timer
         log.write()
         return doNotDisturb

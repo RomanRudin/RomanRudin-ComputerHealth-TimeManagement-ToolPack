@@ -45,23 +45,23 @@ Timetable of lessons or sessions or classes for a week.
 Task list for an everyday usage. Probably with the timer or any other time controlling feature.
 '''
 #TODO Not even started yet
-if SCHEDULE:
-    with open(ABSOLUTE_PATH + 'appData/settings/schedule/schedule_settings.txt') as file:
-        data = file.read().splitlines()
-        SCHEDULE_SETTINGS: Final[dict] = 0 #??????????????????????????????????
-        TIMETABLE_SETTINGS = {"is_on": equality_parser(data[0], True),\
-            "messaging": False if not equality_parser(data[0], True) else equality_parser(data[1], True)}
-        TASK_LIST_SETTINGS = {"is_on": equality_parser(data[2], True),\
-            "messaging": False if not equality_parser(data[2], True) else equality_parser(data[3], True)}
-    if TIMETABLE_SETTINGS['is_on']:
-        with open(ABSOLUTE_PATH + 'appData/settings/schedule/schedule.json') as file:
-            TIMETABLE: Final[dict] = load(file)
-    if TASK_LIST_SETTINGS['is_on']:
-        with open(ABSOLUTE_PATH + 'appData/settings/schedule/everyday_routine.json') as file:
-            TASK_LIST: Final[dict] = load(file)
-    with open(ABSOLUTE_PATH + 'appData/settings/schedule/goals.json') as file:
-        data = load(file)
-        GOALS: Final[dict] = {goal: date(int(day.split('.')[2]), int(day.split('.')[1]),  int(day.split('.')[0])) for goal, day in data.items()}
+# if SCHEDULE:
+#     with open(ABSOLUTE_PATH + 'appData/settings/schedule/schedule_settings.txt') as file:
+#         data = file.read().splitlines()
+#         SCHEDULE_SETTINGS: Final[dict] = 0 #??????????????????????????????????
+#         TIMETABLE_SETTINGS = {"is_on": equality_parser(data[0], True),\
+#             "messaging": False if not equality_parser(data[0], True) else equality_parser(data[1], True)}
+#         TASK_LIST_SETTINGS = {"is_on": equality_parser(data[2], True),\
+#             "messaging": False if not equality_parser(data[2], True) else equality_parser(data[3], True)}
+#     if TIMETABLE_SETTINGS['is_on']:
+#         with open(ABSOLUTE_PATH + 'appData/settings/schedule/schedule.json') as file:
+#             TIMETABLE: Final[dict] = load(file)
+#     if TASK_LIST_SETTINGS['is_on']:
+#         with open(ABSOLUTE_PATH + 'appData/settings/schedule/everyday_routine.json') as file:
+#             TASK_LIST: Final[dict] = load(file)
+#     with open(ABSOLUTE_PATH + 'appData/settings/schedule/goals.json') as file:
+#         data = load(file)
+#         GOALS: Final[dict] = {goal: date(int(day.split('.')[2]), int(day.split('.')[1]),  int(day.split('.')[0])) for goal, day in data.items()}
         
 
 '''
