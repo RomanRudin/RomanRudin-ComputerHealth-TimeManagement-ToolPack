@@ -24,7 +24,8 @@ def getActiveWindowTitle() -> str:
     global activeWindowTitle
     activeWindowHwnd = ctypes.windll.user32.GetForegroundWindow()
     if activeWindowHwnd == 0:
-        raise "ctypes.windll.user32.GetForegroundWindow() is 0"
+        #raise "ctypes.windll.user32.GetForegroundWindow() is 0"
+        print("ctypes.windll.user32.GetForegroundWindow() is 0")
     def foreach_window(hWnd, lParam) -> bool:
         global activeWindowTitle
         if hWnd == activeWindowHwnd:
@@ -44,7 +45,7 @@ class ThreadController():
         self.health_time_counter = {}
 
         #duration between two tracking sessions
-        self.timer = 1          
+        self.timer = 15          
         #duration (in 'timers' units of measure) between two recalculating sessions
         self.management_norm_counter = 5    
         self.stopped = False
