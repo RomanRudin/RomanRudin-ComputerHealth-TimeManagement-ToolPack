@@ -1,9 +1,0 @@
-Social Network 	 10020 	 Discord
-Browser 	 10020 	 msedge
-Entartainment 	 9960 	 steam
-Game 	 7440 	 csgo
-Code 	 2040 	 Code
-Code 	 240 	 Koala
-Learning 	 180 	 chrome
-Tool 	 180 	 DeepL
-Tool 	 120 	 notepad

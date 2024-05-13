@@ -1,8 +1,0 @@
-Social Network 	 27900 	 Discord
-Browser 	 27900 	 msedge
-Entartainment 	 27840 	 steam
-Tool 	 27840 	 DeepL
-Tool 	 25560 	 mspaint
-Game 	 11700 	 Terraria
-Learning 	 3660 	 Zoom
-Game 	 2520 	 csgo

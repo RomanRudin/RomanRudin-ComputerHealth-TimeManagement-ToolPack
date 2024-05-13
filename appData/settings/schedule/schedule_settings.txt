@@ -1,4 +1,0 @@
-Timetable = True
-Timetable_messaging = True
-Task_list = True
-Task_list_messaging = True

@@ -1,7 +1,0 @@
-Browser 	 25320 	 msedge
-Tool 	 25260 	 DeepL
-Tool 	 20220 	 WINWORD
-Social Network 	 17760 	 Discord
-Entartainment 	 17580 	 steam
-Code 	 4440 	 Code
-Learning 	 3660 	 Zoom

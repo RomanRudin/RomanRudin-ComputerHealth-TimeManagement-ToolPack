@@ -1,8 +1,0 @@
-Social Network 	 3480 	 Discord
-Browser 	 3480 	 msedge
-Code 	 3480 	 Code
-Entartainment 	 3420 	 steam
-Tool 	 3420 	 DeepL
-Social Network 	 300 	 Telegram
-Learning 	 300 	 EXCEL
-Code 	 60 	 git

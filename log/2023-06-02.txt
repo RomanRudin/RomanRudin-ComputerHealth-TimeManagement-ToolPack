@@ -1,6 +1,0 @@
-Browser 	 7200 	 msedge
-Tool 	 7140 	 DeepL
-Code 	 1200 	 mmc
-Social Network 	 1020 	 Discord
-Entartainment 	 960 	 steam
-Tool 	 840 	 mspaint

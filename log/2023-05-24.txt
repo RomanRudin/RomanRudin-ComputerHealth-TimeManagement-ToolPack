@@ -1,8 +1,0 @@
-Social Network 	 32760 	 Discord
-Browser 	 32760 	 msedge
-Entartainment 	 32700 	 steam
-Tool 	 30180 	 DeepL
-Game 	 7680 	 csgo
-Learning 	 3600 	 Zoom
-Code 	 1860 	 Code
-Game 	 1200 	 noita
